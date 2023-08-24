@@ -1,24 +1,18 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
-const Login = ({ setUserData }) => {
+const RegisterJobSeeker = ({ setUserData }) => {
   const nav = useNavigate();
 
-  const API_URL = "http://localhost:8181/job_seeker/login"; // Change to local host
+  const API_URL = "http://localhost:8181/job_seeker/register"; // Server Side URL
   const [remCheck, setRemCheck] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  useEffect(() => {
-    const storedData = JSON.parse(localStorage.getItem("userDetailsSaved"));
-    if (storedData !== null) {
-      setEmail(storedData.user.email);
-      setPassword(storedData.user.password);
-    }
-  }, []);
+  const [dateOfBirth, setDateOfBirth] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [mobile, setMobile] = useState("");
 
   const validateForm = (e) => {
     e.preventDefault();
@@ -43,31 +37,20 @@ const Login = ({ setUserData }) => {
 
   const submit = async (e) => {
     e.preventDefault();
-    const data = { email: email, password: password };
+    // if (!validateForm()) {
+    //   return;
+    // }
+    const data = {
+      email: email,
+      password: password,
+      firstName: firstName,
+      lastName: lastName,
+      mobile: mobile,
+      dateOfBirth: dateOfBirth,
+    };
     try {
-      let res = await axios.post(API_URL, data, { withCredentials: true });
-      if (res.data) {
-        alert("Succesful Login"); //Remove this line
-        setUserData(res.data);
-        if (remCheck) {
-          if (remCheck) {
-            const dataToStore = {
-              user: {
-                email: email,
-                password: password,
-              },
-            };
-            localStorage.setItem(
-              "userDetailsSaved",
-              JSON.stringify(dataToStore)
-            );
-          }
-        }
-        // alert(res.data.email);
-        nav("/jobhome");
-      } else {
-        alert("Invalid Login Credentials");
-      }
+      let res = await axios.post(API_URL, data);
+      alert(res.data);
     } catch {
       alert("Connection to the Server Failed");
     }
@@ -94,8 +77,8 @@ const Login = ({ setUserData }) => {
             width="50px"
             style={{ marginTop: "40px" }}
           />
-          <h4 style={{ marginTop: "20px" }}>Login</h4>
-          <p className="my-4">Use your email address to continue</p>
+          <h4 style={{ marginTop: "20px" }}>Registration for Job Seeker</h4>
+          <p className="my-4">Create an account with us to seek jobs!</p>
           <form
             id="loginform"
             className="inventorylogin mb-2"
@@ -123,17 +106,56 @@ const Login = ({ setUserData }) => {
                 value={password}
               />
             </div>
-            <div className="px-4 my-2" style={{ textAlignLast: "left" }}>
-              <label className="form-check-label">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  name="remember"
-                  onChange={(e) => setRemCheck(!remCheck)}
-                />
-                Remember me
-              </label>
+
+            <div className="px-4" style={{ marginTop: "10px" }}>
+              <input
+                className="form-control"
+                type="text"
+                placeholder="First Name"
+                required
+                id="firstNameJob"
+                onChange={(e) => setFirstName(e.target.value)}
+                value={firstName}
+              />
             </div>
+
+            <div className="px-4 " style={{ marginTop: "10px" }}>
+              <input
+                className="form-control"
+                type="text"
+                placeholder="Last Name"
+                required
+                id="lastNameJob"
+                onChange={(e) => setLastName(e.target.value)}
+                value={lastName}
+              />
+            </div>
+
+            <div className="px-4" style={{ marginTop: 10 }}>
+              <input
+                className="form-control"
+                type="text"
+                placeholder="Mobile No."
+                pattern="[789][0-9]{9}"
+                required
+                id="mobileJob"
+                value={mobile}
+                onChange={(e) => setMobile(e.target.value)}
+              />
+            </div>
+
+            <div className="px-4" style={{ marginTop: 10 }}>
+              <label htmlFor="dateOfBirth">Date Of Birth:</label>
+              <input
+                className="form-control"
+                type="date"
+                required
+                id="dateOfBirth"
+                value={dateOfBirth}
+                onChange={(e) => setDateOfBirth(e.target.value)}
+              />
+            </div>
+
             <div className="px-4" style={{ marginTop: "20px" }}>
               <button
                 type="submit"
@@ -144,13 +166,13 @@ const Login = ({ setUserData }) => {
               </button>
             </div>
           </form>
-          <form action="registerjobseeker">
-            Don't have an account?
+          <form action="login">
+            Already have an account?
             <button
               className="btn btn-link mt-0"
               style={{ textDecoration: "none", fontWeight: "bold" }}
             >
-              Sign up
+              Login
             </button>
           </form>
         </div>
@@ -159,4 +181,4 @@ const Login = ({ setUserData }) => {
   );
 };
 
-export default Login;
+export default RegisterJobSeeker;

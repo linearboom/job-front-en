@@ -1,19 +1,17 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
-const Login = ({ setUserData }) => {
+const EmployerLogin = ({ employerData, setEmployerData }) => {
   const nav = useNavigate();
 
-  const API_URL = "http://localhost:8181/job_seeker/login"; // Change to local host
+  const API_URL = "http://localhost:8181/employer/login"; // Change to local host
   const [remCheck, setRemCheck] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   useEffect(() => {
-    const storedData = JSON.parse(localStorage.getItem("userDetailsSaved"));
+    const storedData = JSON.parse(localStorage.getItem("employerDataSaved"));
     if (storedData !== null) {
       setEmail(storedData.user.email);
       setPassword(storedData.user.password);
@@ -48,7 +46,7 @@ const Login = ({ setUserData }) => {
       let res = await axios.post(API_URL, data, { withCredentials: true });
       if (res.data) {
         alert("Succesful Login"); //Remove this line
-        setUserData(res.data);
+        setEmployerData(res.data);
         if (remCheck) {
           if (remCheck) {
             const dataToStore = {
@@ -58,13 +56,13 @@ const Login = ({ setUserData }) => {
               },
             };
             localStorage.setItem(
-              "userDetailsSaved",
+              "employerDataSaved",
               JSON.stringify(dataToStore)
             );
           }
         }
         // alert(res.data.email);
-        nav("/jobhome");
+        nav("/postnewjob");
       } else {
         alert("Invalid Login Credentials");
       }
@@ -94,7 +92,7 @@ const Login = ({ setUserData }) => {
             width="50px"
             style={{ marginTop: "40px" }}
           />
-          <h4 style={{ marginTop: "20px" }}>Login</h4>
+          <h4 style={{ marginTop: "20px" }}>Employer Login</h4>
           <p className="my-4">Use your email address to continue</p>
           <form
             id="loginform"
@@ -159,4 +157,4 @@ const Login = ({ setUserData }) => {
   );
 };
 
-export default Login;
+export default EmployerLogin;

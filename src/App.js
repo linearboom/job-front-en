@@ -3,14 +3,117 @@ import { Route, Routes, useHistory } from "react-router-dom";
 
 import GuestTopperNav from "./Guest/Topper/GuestTopperNav";
 import Login from "./Guest/Login/Login";
+import { useState } from "react";
+import JobHome from "./JobSeeker/JobHome";
+import RegisterJobSeeker from "./Guest/Login/RegisterJobSeeker";
+import JobSeekerNav from "./JobSeeker/JobSeekerNav";
+import JobProfile from "./JobSeeker/JobProfile";
+import EmployerLogin from "./Guest/Login/Employer/EmployerLogin";
+import EmployerRegistraton from "./Guest/Login/Employer/EmployerRegistraton";
+import EmployerNav from "./Employer/EmployerNav";
+import PostNewJob from "./Employer/PostNewJob";
+import EditSkill from "./CommonComp/EditSkill";
+import PostedJobs from "./Employer/PostedJobs";
+import JobCard from "./Employer/JobCard";
+
+import "./style.css";
+import Home from "./Guest/Home";
+
+const ProtectedRoute = ({ employerData, element }) => {
+  if (employerData) {
+    return element;
+  }
+  return <h1 style={{ marginTop: "80px" }}>Kindly Login First</h1>;
+};
 
 function App() {
+  const [userData, setUserData] = useState(null);
+  const [employerData, setEmployerData] = useState(null);
+  const [jobData, setJobData] = useState(null);
+  const [adminData, setAdminData] = useState(null);
+
   return (
     <div className="App">
-      <GuestTopperNav></GuestTopperNav>
+      {!userData && !employerData && !adminData ? (
+        <GuestTopperNav></GuestTopperNav>
+      ) : userData ? (
+        <JobSeekerNav
+          userData={userData}
+          setUserData={setUserData}
+        ></JobSeekerNav>
+      ) : employerData ? (
+        <EmployerNav
+          employerData={employerData}
+          setEmployerData={setEmployerData}
+        ></EmployerNav>
+      ) : (
+        <h1>Admin Nav</h1>
+      )}
+      {/* {!userData && !adminData && !employerData && (
+        <GuestTopperNav></GuestTopperNav>
+      )}
+      {userData && (
+        <JobSeekerNav
+          userData={userData}
+          setUserData={setUserData}
+        ></JobSeekerNav>
+      )} */}
       <Routes>
-        <Route exact path="/" element={<h1>HELLO</h1>} />
-        <Route path="login" element={<Login />}></Route>
+        <Route exact path="/" element={<Home></Home>} />
+        <Route
+          path="login"
+          element={<Login setUserData={setUserData} />}
+        ></Route>
+        <Route
+          path="registerjobseeker"
+          element={<RegisterJobSeeker setUserData={setUserData} />}
+        ></Route>
+        {/* {Job Seeker Routes Create a protected route for the same} */}
+        <Route path="jobhome" element={<JobHome userData={userData} />}></Route>
+        <Route
+          path="jobprofile"
+          element={<JobProfile userData={userData} />}
+        ></Route>
+
+        <Route
+          path="employerlogin"
+          element={<EmployerLogin setEmployerData={setEmployerData} />}
+        ></Route>
+        <Route
+          path="registeremployer"
+          element={<EmployerRegistraton setUserData={setUserData} />}
+        ></Route>
+        <Route
+          path="postnewjob"
+          element={
+            <ProtectedRoute
+              element={<PostNewJob jobData={jobData} setJobData={setJobData} />}
+              employerData={employerData}
+            ></ProtectedRoute>
+          }
+        ></Route>
+        {/* {Add this in proteceted route later} */}
+        <Route
+          path="editskilltest"
+          element={
+            <EditSkill jobData={jobData} setJobData={setJobData}></EditSkill>
+          }
+        ></Route>
+        <Route
+          path="postedjobs"
+          element={
+            <ProtectedRoute
+              element={
+                <PostedJobs
+                  employerData={employerData}
+                  setEmployerData={setEmployerData}
+                />
+              }
+              employerData={employerData}
+            ></ProtectedRoute>
+          }
+        ></Route>
+        <Route path="*" element={<h1>No path</h1>}></Route>
       </Routes>
     </div>
   );
