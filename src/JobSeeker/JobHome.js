@@ -19,7 +19,6 @@ const JobHome = ({ userData }) => {
       console.log(searchresult);
     };
     fetchData();
-    alert(searchJobTitle);
   };
 
   return (
@@ -55,7 +54,7 @@ const JobHome = ({ userData }) => {
             {searchresult.length > 1 ? (
               searchresult.map((item) => (
                 <div key={item.jobId}>
-                  <JobCard element={item}></JobCard>
+                  <JobCard job={item}></JobCard>
                 </div>
               ))
             ) : (

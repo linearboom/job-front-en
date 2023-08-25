@@ -4,6 +4,9 @@ import { Route, Routes, useHistory } from "react-router-dom";
 import GuestTopperNav from "./Guest/Topper/GuestTopperNav";
 import Login from "./Guest/Login/Login";
 import { useState } from "react";
+import { useEffect } from "react";
+import axios from "axios";
+
 import JobHome from "./JobSeeker/JobHome";
 import RegisterJobSeeker from "./Guest/Login/RegisterJobSeeker";
 import JobSeekerNav from "./JobSeeker/JobSeekerNav";
@@ -18,6 +21,7 @@ import JobCard from "./Employer/JobCard";
 
 import "./style.css";
 import Home from "./Guest/Home";
+import Resume from "./JobSeeker/Resume";
 
 const ProtectedRoute = ({ employerData, element }) => {
   if (employerData) {
@@ -31,6 +35,24 @@ function App() {
   const [employerData, setEmployerData] = useState(null);
   const [jobData, setJobData] = useState(null);
   const [adminData, setAdminData] = useState(null);
+  const [changeJob, setChangeJob] = useState(false);
+  const JOB_API = "http://localhost:8181/job_seeker/refresh";
+
+  useEffect(() => {
+    const fetchData = async () => {
+      // Refreshed and sends the data using the session management
+      const res = await axios.post(
+        JOB_API,
+        { name: "Hello" },
+        { withCredentials: true }
+      );
+      setUserData(res.data);
+    };
+    if (changeJob) {
+      fetchData();
+      setChangeJob(false);
+    }
+  }, [changeJob]);
 
   return (
     <div className="App">
@@ -72,7 +94,9 @@ function App() {
         <Route path="jobhome" element={<JobHome userData={userData} />}></Route>
         <Route
           path="jobprofile"
-          element={<JobProfile userData={userData} />}
+          element={
+            <JobProfile userData={userData} setChangeJob={setChangeJob} />
+          }
         ></Route>
 
         <Route
@@ -113,6 +137,7 @@ function App() {
             ></ProtectedRoute>
           }
         ></Route>
+        <Route path="/resume" element={<Resume></Resume>}></Route>
         <Route path="*" element={<h1>No path</h1>}></Route>
       </Routes>
     </div>
