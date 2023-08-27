@@ -2,7 +2,7 @@ import React from "react";
 // import "owl.carousel/dist/assets/owl.carousel.css"; // Import Owl Carousel CSS
 // import "owl.carousel/dist/assets/owl.theme.default.css"; // Import Owl Carousel Default Theme CSS
 // import OwlCarousel from "react-owl-carousel"; // Import React Owl Carousel
-import "../style.css";
+// import "../style.css";
 //import Search from "./Search";
 
 const Home = () => {

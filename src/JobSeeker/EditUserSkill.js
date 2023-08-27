@@ -48,7 +48,7 @@ const EditUserSkill = ({
       let res = await axios.post(DELETE_URL, item, { withCredentials: true });
       // console.log("Hello");
       if (res.data) {
-        alert(res.data);
+        //alert(res.data);
         setChangeJob(true);
       } else {
         alert("Session Expired");
