@@ -95,7 +95,6 @@ const JobProfile = ({ userData, setJobData, setChangeJob }) => {
                 </div>
                 {/* {/* add Image *  <div>/} */}
                 <div className="col-md-3">
-                  {" "}
                   <img
                     src={profileImage}
                     alt=""

@@ -24,6 +24,7 @@ import Home from "./Guest/Home";
 import Resume from "./JobSeeker/Resume";
 import Contact from "./Guest/Contact";
 import AppliedJob from "./JobSeeker/AppliedJob";
+import EmployerProfile from "./Employer/EmployerProfileChange";
 
 const ProtectedRoute = ({ employerData, element }) => {
   if (employerData) {
@@ -45,7 +46,9 @@ function App() {
   const [jobData, setJobData] = useState(null);
   const [adminData, setAdminData] = useState(null);
   const [changeJob, setChangeJob] = useState(false);
+  const [changeEmployer, setChangeEmployer] = useState(false);
   const JOB_API = "http://localhost:8181/job_seeker/refresh";
+  const EMP_API = "http://localhost:8181/employer/refresh";
 
   useEffect(() => {
     const fetchData = async () => {
@@ -62,6 +65,22 @@ function App() {
       setChangeJob(false);
     }
   }, [changeJob]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      // Refreshed and sends the data using the session management
+      const res = await axios.post(
+        EMP_API,
+        { name: "Hello" },
+        { withCredentials: true }
+      );
+      setEmployerData(res.data);
+    };
+    if (changeEmployer) {
+      fetchData();
+      setChangeEmployer(false);
+    }
+  }, [changeEmployer]);
 
   return (
     <div className="App">
@@ -135,6 +154,20 @@ function App() {
           element={<EmployerRegistraton setUserData={setUserData} />}
         ></Route>
         <Route
+          path="employerprofile"
+          element={
+            <ProtectedRoute
+              element={
+                <EmployerProfile
+                  employerData={employerData}
+                  setChangeEmployer={setChangeEmployer}
+                ></EmployerProfile>
+              }
+              employerData={employerData}
+            ></ProtectedRoute>
+          }
+        ></Route>
+        <Route
           path="postnewjob"
           element={
             <ProtectedRoute
@@ -147,7 +180,15 @@ function App() {
         <Route
           path="editskilltest"
           element={
-            <EditSkill jobData={jobData} setJobData={setJobData}></EditSkill>
+            <ProtectedRoute
+              element={
+                <EditSkill
+                  jobData={jobData}
+                  setJobData={setJobData}
+                ></EditSkill>
+              }
+              employerData={employerData}
+            ></ProtectedRoute>
           }
         ></Route>
         <Route

@@ -5,6 +5,7 @@ import axios from "axios";
 import ViewJobModal from "./ViewJobModal";
 import { useNavigate } from "react-router-dom";
 import Applications from "./Applications";
+import "./employerStyle.css";
 
 const PostedJobs = ({ employerData, setEmployerData, setChangeEmployer }) => {
   const [jobs, setJobs] = useState(employerData.jobs);
@@ -52,7 +53,7 @@ const PostedJobs = ({ employerData, setEmployerData, setChangeEmployer }) => {
     setJobs(employerData.jobs);
   }, [employerData]);
   return (
-    <div style={{ marginTop: "60px" }}>
+    <div className="CPJOBS" style={{ marginTop: "60px" }}>
       {!viewApplicants ? (
         <table className="table table-striped" style={{ textAlign: "center" }}>
           <thead>
