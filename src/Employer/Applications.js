@@ -6,10 +6,14 @@ const Applications = ({ job, setViewApplicants, setChangeEmployer }) => {
   const APP = "http://localhost:8181/employer/viewApplicants";
   const [applications, setApplications] = useState(null);
   const [viewJobSeeker, setViewJobSeeker] = useState(false);
+  const [applicantFetchData, setApplicantFetchData] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = { jobId: job.jobId };
+      const data = {
+        jobId: job.jobId,
+      };
+
       try {
         let res = await axios.post(APP, data, { withCredentials: true });
         // console.log("Hello");
@@ -25,6 +29,16 @@ const Applications = ({ job, setViewApplicants, setChangeEmployer }) => {
     };
     fetchData();
   }, []);
+
+  const fetchApplicantData = (e, item) => {
+    const data = {
+      jobId: job.jobId,
+      applicationId: item.applicationId,
+      jobSeekerId: item.jobSeekerDTO.jobSeekerId,
+    };
+    setApplicantFetchData(data);
+  };
+
   return (
     <div>
       <span>Showing Applicants for Job Id : {job.jobId}</span>
@@ -63,6 +77,7 @@ const Applications = ({ job, setViewApplicants, setChangeEmployer }) => {
                         <button
                           onClick={(e) => {
                             setViewJobSeeker(true);
+                            fetchApplicantData(e, item);
                             // Set up a confirmation Modal
                           }}
                         >
@@ -75,7 +90,11 @@ const Applications = ({ job, setViewApplicants, setChangeEmployer }) => {
               </table>
             </div>
           ) : (
-            <ApplicantProfileComponent></ApplicantProfileComponent>
+            <ApplicantProfileComponent
+              applicantFetchData={applicantFetchData}
+              setChangeEmployer={setChangeEmployer}
+              setViewJobSeeker={setViewJobSeeker}
+            ></ApplicantProfileComponent>
           )
         ) : (
           <div>

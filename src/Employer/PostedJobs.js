@@ -77,7 +77,6 @@ const PostedJobs = ({ employerData, setEmployerData, setChangeEmployer }) => {
                       onClick={(e) => {
                         setJob(item);
                         setViewApplicants(true);
-                        alert("Hello");
                       }}
                     >
                       View Applicants
