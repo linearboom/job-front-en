@@ -121,11 +121,14 @@ const JobCard = ({ job, setJob, showApplyModal, setShowApplyModal }) => {
             </small>
           </div>
         </div>
+        {/* {Skills } */}
         <div style={{ marginTop: " 20px" }}>
           {job.skills.length ? (
             <div>
               {job.skills.map((item) => (
-                <span>{item.skillSet.skillName}</span>
+                <span style={{ border: "solid" }}>
+                  {item.skillSet.skillName}
+                </span>
               ))}
             </div>
           ) : (

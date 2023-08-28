@@ -55,7 +55,7 @@ const JobSeekerNav = ({ userData, setUserData }) => {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="productsadmin">
+                <Link className="nav-link" to="appliedjobsjobseeker">
                   Applied Jobs
                 </Link>
               </li>

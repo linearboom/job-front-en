@@ -22,9 +22,18 @@ import JobCard from "./Employer/JobCard";
 import "./style.css";
 import Home from "./Guest/Home";
 import Resume from "./JobSeeker/Resume";
+import Contact from "./Guest/Contact";
+import AppliedJob from "./JobSeeker/AppliedJob";
 
 const ProtectedRoute = ({ employerData, element }) => {
   if (employerData) {
+    return element;
+  }
+  return <h1 style={{ marginTop: "80px" }}>Kindly Login First</h1>;
+};
+
+const ProtectedJob = ({ userData, element }) => {
+  if (userData) {
     return element;
   }
   return <h1 style={{ marginTop: "80px" }}>Kindly Login First</h1>;
@@ -90,6 +99,10 @@ function App() {
           path="registerjobseeker"
           element={<RegisterJobSeeker setUserData={setUserData} />}
         ></Route>
+        <Route
+          path="contact"
+          element={<Contact setUserData={setUserData} />}
+        ></Route>
         {/* {Job Seeker Routes Create a protected route for the same} */}
         <Route path="jobhome" element={<JobHome userData={userData} />}></Route>
         <Route
@@ -98,7 +111,21 @@ function App() {
             <JobProfile userData={userData} setChangeJob={setChangeJob} />
           }
         ></Route>
-
+        <Route
+          path="appliedjobsjobseeker"
+          element={
+            <ProtectedJob
+              userData={userData}
+              element={
+                <AppliedJob
+                  userData={userData}
+                  setChangeJob={setChangeJob}
+                ></AppliedJob>
+              }
+            ></ProtectedJob>
+          }
+        ></Route>
+        {/* {Employer Routes } */}
         <Route
           path="employerlogin"
           element={<EmployerLogin setEmployerData={setEmployerData} />}
