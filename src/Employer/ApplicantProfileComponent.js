@@ -47,6 +47,7 @@ const ApplicantProfileComponent = ({
             </div>
           </div>
           <div className="row col-8">
+            {/* Work Experience */}
             <div className="">
               <span className="card-title fw-bold">Work Experience</span>
               {applicationData.experience &&
