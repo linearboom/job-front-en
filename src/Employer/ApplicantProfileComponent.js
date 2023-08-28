@@ -28,13 +28,16 @@ const ApplicantProfileComponent = ({
               }
             )
             .then((response) => {
-              const imageBlob = new Blob([response.data], {
-                type: "image/jpeg",
-              }); // Change the content type as needed
+              // Convert the binary image data to a Data URL using the FileReader API
+              const blob = new Blob([response.data], { type: "image/jpeg" }); // Change the content type if needed
+              const reader = new FileReader();
 
-              const imageUrl = URL.createObjectURL(imageBlob);
-              setProfileImage(imageUrl);
-              console.log("Profile Image : ", profileImage);
+              reader.onload = () => {
+                const imageUrl = reader.result;
+                setProfileImage(imageUrl);
+              };
+
+              reader.readAsDataURL(blob);
             })
             .catch((error) => {
               console.error("Error fetching image:", error);
@@ -55,7 +58,7 @@ const ApplicantProfileComponent = ({
       {applicationData ? (
         <div className="row">
           <div className="col-4">
-            <div className="">
+            <div className="d-flex justify-content-center">
               <img
                 key={profileImage}
                 src={profileImage}
