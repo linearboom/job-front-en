@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
+import FetchJobTypes from "../Util/FetchJobTypes";
 import InputGroup from "react-bootstrap/InputGroup";
 import Form from "react-bootstrap/Form";
 
@@ -20,6 +21,17 @@ const EducationForm = ({ education, setModal, setChangeJob }) => {
     education || educationDefault
   );
   const UPDATE_URL = "http://localhost:8181/job_seeker/addEducation"; //  Back End URL
+  const [qualificationOptions, setQualficationOptions] = useState([]);
+  const FETCH_QUALI = "http://localhost:8181/job_seeker/listQualificationTypes";
+  // Use Effect on initial load to fetch the Job Types from the server
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await FetchJobTypes(FETCH_QUALI);
+      // console.log("Fetched data:", data.dat);
+      setQualficationOptions(data.data);
+    };
+    fetchData();
+  }, []);
 
   const submit = async (e) => {
     //alert(updateEducation);
@@ -81,23 +93,34 @@ const EducationForm = ({ education, setModal, setChangeJob }) => {
                   value={updateEducation.major}
                 />
               </div>
-              {/* <div className="px-4" style={{ marginTop: "30px" }}>
-                <label>Qualification*</label>
-                <input
-                  className="form-control"
-                  type="text"
-                  placeholder="Job Title"
-                  required
-                  id="major"
-                  onChange={(e) =>
+              <div className="px-4" style={{ marginTop: 10 }}>
+                <label>Select the Type of Qualification</label>
+                <select
+                  key={updateEducation.qualification.qualificationId}
+                  className="form-select"
+                  value={updateEducation.qualification.qualificarionName}
+                  onChange={(e) => {
+                    const selectedQualification = qualificationOptions.find(
+                      (item) => item.qualificationId == e.target.value
+                    );
+
                     setUpdateEducation({
-                      ...education,
-                      degreeName: e.target.value,
-                    })
-                  }
-                  value={updateEducation.major}
-                />
-              </div> */}
+                      ...updateEducation,
+                      qualification: selectedQualification,
+                    });
+                  }} // Update jobType property
+                >
+                  {qualificationOptions &&
+                    qualificationOptions.map((item) => (
+                      <option
+                        key={item.qualificationId}
+                        value={item.qualificationId}
+                      >
+                        {item.qualificarionName}
+                      </option>
+                    ))}
+                </select>
+              </div>
               <div className="px-4" style={{ marginTop: "30px" }}>
                 <label>Percentage*</label>
                 <input
