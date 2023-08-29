@@ -196,11 +196,20 @@ const EducationForm = ({ education, setModal, setChangeJob }) => {
               <div className="px-4" style={{ marginTop: "20px" }}>
                 <button
                   type="submit"
-                  className="btn container-fluid mb-5"
+                  className="btn container-fluid mb-3 fw-bold "
                   style={{ backgroundColor: "#ffd400" }}
                   onClick={submit}
                 >
                   Submit
+                </button>
+                <button
+                  className="btn container-fluid mb-5 fw-bold"
+                  style={{ backgroundColor: "#ffd400" }}
+                  onClick={(e) => {
+                    setModal(null);
+                  }}
+                >
+                  Cancel
                 </button>
               </div>
             </div>

@@ -123,12 +123,21 @@ const Certification = ({ certification, setModal, setChangeJob }) => {
               </div>
 
               <div className="px-4" style={{ marginTop: "20px" }}>
-                <button
+              <button
                   type="submit"
-                  className="btn container-fluid"
+                  className="btn container-fluid mb-3 fw-bold"
                   style={{ backgroundColor: "#ffd400" }}
                 >
-                  Continue
+                  Submit
+                </button>
+                <button
+                  className="btn container-fluid mb-5 fw-bold"
+                  style={{ backgroundColor: "#ffd400" }}
+                  onClick={(e) => {
+                    setModal(null);
+                  }}
+                >
+                  Cancel
                 </button>
               </div>
             </form>

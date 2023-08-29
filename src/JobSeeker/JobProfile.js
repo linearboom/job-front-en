@@ -106,6 +106,28 @@ const JobProfile = ({ userData, setJobData, setChangeJob }) => {
                   />
                 </div>
               </div>
+
+              {/* Resume Headline */}
+              <div className="card-header bg-warning d-flex justify-content-between">
+                <div>
+                  <span className="card-title fw-bold">Summary</span>
+                </div>
+                <div>
+                  <FontAwesomeIcon
+                    className="btn btn-lg"
+                    onClick={(e) => showModal(e, "summary")}
+                    icon={faPenToSquare}
+                  />
+                </div>
+              </div>
+              <div className="d-flex justify-content-between">
+                <pre>
+                  {userData.resumeHeadline
+                    ? userData.resumeHeadline
+                    : "No Summary"}
+                </pre>
+              </div>
+
               {/* skill */}
               <div className="card-header bg-warning d-flex justify-content-between">
                 <div>

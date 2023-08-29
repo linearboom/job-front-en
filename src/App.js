@@ -25,6 +25,7 @@ import Resume from "./JobSeeker/Resume";
 import Contact from "./Guest/Contact";
 import AppliedJob from "./JobSeeker/AppliedJob";
 import EmployerProfile from "./Employer/EmployerProfileChange";
+import JobDescription from "./Employer/JobDescription";
 
 const ProtectedRoute = ({ employerData, element }) => {
   if (employerData) {
@@ -123,11 +124,24 @@ function App() {
           element={<Contact setUserData={setUserData} />}
         ></Route>
         {/* {Job Seeker Routes Create a protected route for the same} */}
-        <Route path="jobhome" element={<JobHome userData={userData} />}></Route>
+        <Route
+          path="jobhome"
+          element={<JobHome userData={userData} setJobData={setJobData} />}
+        ></Route>
         <Route
           path="jobprofile"
           element={
             <JobProfile userData={userData} setChangeJob={setChangeJob} />
+          }
+        ></Route>
+        <Route
+          path="jobProfilePage"
+          element={
+            <JobDescription
+              userData={userData}
+              setChangeJob={setChangeJob}
+              jobData={jobData}
+            ></JobDescription>
           }
         ></Route>
         <Route

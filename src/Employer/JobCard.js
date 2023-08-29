@@ -3,6 +3,7 @@ import "../style.css";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "./JobCard.css";
 
 // Rohan
 
@@ -17,7 +18,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { error } from "pdf-lib";
 
-const JobCard = ({ job, setJob, showApplyModal, setShowApplyModal }) => {
+const JobCard = ({ job, setJobData, showApplyModal, setShowApplyModal }) => {
   // const job = {
   //   jobId: 49,
   //   jobTitle: "Test",
@@ -76,8 +77,27 @@ const JobCard = ({ job, setJob, showApplyModal, setShowApplyModal }) => {
   };
 
   return (
-    <div style={{ marginLeft: "200px", marginRight: "200px" }}>
-      <div className="job-item p-4 mb-4" style={{ height: "200px" }}>
+    <div
+      className="FARCARD"
+      onClick={(e) => {
+        nav("/jobProfilePage");
+        setJobData(job);
+      }}
+      style={{ marginLeft: "200px", marginRight: "200px" }}
+    >
+      <div
+        className="job-item p-4 mb-4"
+        style={{
+          height: "200px",
+          backgroundColor: "#f7f7f7",
+          borderRadius: "10px",
+          boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
+          padding: "15px",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+        }}
+      >
         <div className="row g-4">
           <div className="col-sm-12 col-md-8 d-flex align-items-center">
             <img
@@ -126,7 +146,18 @@ const JobCard = ({ job, setJob, showApplyModal, setShowApplyModal }) => {
           {job.skills.length ? (
             <div>
               {job.skills.map((item) => (
-                <span style={{ border: "solid" }}>
+                <span
+                  style={{
+                    display: "inline-block",
+                    padding: "5px 15px",
+                    margin: "5px",
+                    backgroundColor: "#D3D3D3",
+                    color: "Black",
+                    borderRadius: "20px",
+                    textAlign: "center",
+                    minWidth: "80px",
+                  }}
+                >
                   {item.skillSet.skillName}
                 </span>
               ))}

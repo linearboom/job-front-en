@@ -3,7 +3,7 @@ import axios from "axios";
 import FetchJobTypes from "../Util/FetchJobTypes"; //USed for sending all the get requests
 import JobCard from "../Employer/JobCard";
 
-const JobHome = ({ userData }) => {
+const JobHome = ({ userData, jobData, setJobData }) => {
   const API_URL =
     "http://localhost:8181/job_seeker/containingTitleNameJobs?titleName="; //Finding the URL
 
@@ -22,7 +22,7 @@ const JobHome = ({ userData }) => {
   };
 
   return (
-    <div style={{ marginTop: "80px" }}>
+    <div style={{ marginTop: "80px" }} className="Align-Center">
       {userData !== null ? (
         <div>
           <h1>Welcome {userData.firstName}</h1>
@@ -54,7 +54,7 @@ const JobHome = ({ userData }) => {
             {searchresult.length > 1 ? (
               searchresult.map((item) => (
                 <div key={item.jobId}>
-                  <JobCard job={item}></JobCard>
+                  <JobCard job={item} setJobData={setJobData}></JobCard>
                 </div>
               ))
             ) : (
