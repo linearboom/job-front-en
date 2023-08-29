@@ -83,6 +83,22 @@ function App() {
     }
   }, [changeEmployer]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      // Refreshed and sends the data using the session management
+      const res = await axios.post(
+        EMP_API,
+        { name: "Hello" },
+        { withCredentials: true }
+      );
+      setEmployerData(res.data);
+    };
+    if (changeEmployer) {
+      fetchData();
+      setChangeEmployer(false);
+    }
+  }, [changeEmployer]);
+
   return (
     <div className="App">
       {!userData && !employerData && !adminData ? (
@@ -141,6 +157,7 @@ function App() {
               userData={userData}
               setChangeJob={setChangeJob}
               jobData={jobData}
+              setJobData={setJobData}
             ></JobDescription>
           }
         ></Route>
@@ -153,6 +170,8 @@ function App() {
                 <AppliedJob
                   userData={userData}
                   setChangeJob={setChangeJob}
+                  setJobData={setJobData}
+                  jobData={jobData}
                 ></AppliedJob>
               }
             ></ProtectedJob>
@@ -185,7 +204,13 @@ function App() {
           path="postnewjob"
           element={
             <ProtectedRoute
-              element={<PostNewJob jobData={jobData} setJobData={setJobData} />}
+              element={
+                <PostNewJob
+                  jobData={jobData}
+                  setJobData={setJobData}
+                  setChangeEmployer={setChangeEmployer}
+                />
+              }
               employerData={employerData}
             ></ProtectedRoute>
           }
@@ -199,6 +224,7 @@ function App() {
                 <EditSkill
                   jobData={jobData}
                   setJobData={setJobData}
+                  setChangeEmployer={setChangeEmployer}
                 ></EditSkill>
               }
               employerData={employerData}
@@ -213,6 +239,8 @@ function App() {
                 <PostedJobs
                   employerData={employerData}
                   setEmployerData={setEmployerData}
+                  setJobData={setJobData}
+                  setChangeEmployer={setChangeEmployer}
                 />
               }
               employerData={employerData}

@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import DeleteConfirmation from "../Util/DeleteConfirmation";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 // Shows the list of applied jobs
-const AppliedJob = ({ userData, setChangeJob }) => {
+const AppliedJob = ({ userData, setChangeJob, jobData, setJobData }) => {
   const [application, setApplication] = useState(userData.jobSeekerApplication);
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [itemDelete, setItemDelete] = useState(null);
   const DELETE_URL = "http://localhost:8181/job_seeker/deleteApplication";
-
+  const nav = useNavigate();
   const hideModal = () => {
     setConfirmDelete(false);
   };
@@ -50,11 +51,28 @@ const AppliedJob = ({ userData, setChangeJob }) => {
               application.map((item) => (
                 <tr key={item.applicationId}>
                   <td>{item.applicationId}</td>
-                  <td>{item.job.jobTitle}</td>
+                  <td>
+                    {item.job ? (
+                      item.job.jobTitle
+                    ) : (
+                      <p className="bg bg-danger">Job has been deleted</p>
+                    )}
+                  </td>
                   <td>{item.applyDate.slice(0, 10)}</td>
                   <td>{item.isContacted === "\u0000" ? "NO" : "YES"}</td>
                   <td>
-                    <button>View</button>
+                    <button
+                      onClick={(e) => {
+                        if (item.job) {
+                          setJobData(item.job);
+                          nav("/jobProfilePage");
+                        } else {
+                          alert("Job has been Deleted!");
+                        }
+                      }}
+                    >
+                      View
+                    </button>
                   </td>
                   <td>
                     <button

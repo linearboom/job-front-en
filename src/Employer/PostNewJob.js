@@ -10,7 +10,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 //import Select, { components } from "react-select";
 import EditSkill from "../CommonComp/EditSkill";
 
-const PostNewJob = ({ jobData, setJobData }) => {
+const PostNewJob = ({ jobData, setJobData, setChangeEmployer }) => {
   const API_URL = "http://localhost:8181/employer/postNewJob"; // Server Side URL
   const FETCH_JOB_TYPES_URL =
     "http://localhost:8181/job_seeker/getJobPreferenceTypes";
@@ -20,24 +20,28 @@ const PostNewJob = ({ jobData, setJobData }) => {
 
   const nav = useNavigate();
   const [designationInput, setDesignationInput] = useState("TEST");
-  const [locationInput, SetLocationInput] = useState("");
+  const [locationInput, SetLocationInput] = useState(
+    jobData?.location?.locationName || ""
+  );
   const [jobTypeInput, setJobTypeInput] = useState("FT");
   const [jobTypeOptions, setJobTypeOptions] = useState([]);
   const [matchingDesignation, setMatchingDesignation] = useState([]);
   //const [skills, setSkills] = useState([]);
-  const [job, setJob] = useState({
-    isActive: true,
-    jobTitle: "Test",
-    jobDescription: "Test",
-    postAvail: 1,
-    jobType: { jobType: 1, roleName: "FT" },
-    designation: { designationName: "TEST" },
-    minSalary: 0,
-    maxSalary: 10000,
-    minExperience: 0,
-    maxExperience: 2,
-    location: { locationName: "" },
-  });
+  const [job, setJob] = useState(
+    jobData || {
+      isActive: true,
+      jobTitle: "",
+      jobDescription: "",
+      postAvail: 1,
+      jobType: { jobType: 1, roleName: "FT" },
+      designation: { designationName: "TEST" },
+      minSalary: 0,
+      maxSalary: 10000,
+      minExperience: 0,
+      maxExperience: 2,
+      location: { locationName: "" },
+    }
+  );
   // const [jobDescription, setJobDescription] = useState("");
   // const [postAvail, setPostAvail] = useState(1);
   // const [jobType, setJobType] = useState([]);
@@ -69,11 +73,15 @@ const PostNewJob = ({ jobData, setJobData }) => {
   }, [designationInput]);
 
   const submit = async (e) => {
-    alert(job.jobDescription);
+    //alert(job.jobDescription);
     e.preventDefault();
     // if (!validateForm()) {
     //   return;
     // }
+    let localskill = [];
+    if (jobData) {
+      localskill = jobData.skills;
+    }
     const data = {
       job: job,
       skills: [],
@@ -84,6 +92,7 @@ const PostNewJob = ({ jobData, setJobData }) => {
       if (res.data) {
         //nav(`/editskilltest?jobId=${res.data.JobId}`);
         setJobData(res.data);
+        setChangeEmployer(true);
         nav("/editskilltest");
       } else {
         alert("Session Expired");

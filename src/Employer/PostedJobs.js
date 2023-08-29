@@ -7,7 +7,12 @@ import { useNavigate } from "react-router-dom";
 import Applications from "./Applications";
 import "./employerStyle.css";
 
-const PostedJobs = ({ employerData, setEmployerData, setChangeEmployer }) => {
+const PostedJobs = ({
+  employerData,
+  setEmployerData,
+  setChangeEmployer,
+  setJobData,
+}) => {
   const [jobs, setJobs] = useState(employerData.jobs);
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [itemDelete, setItemDelete] = useState(null);
@@ -25,6 +30,8 @@ const PostedJobs = ({ employerData, setEmployerData, setChangeEmployer }) => {
 
   const handleEdit = () => {
     setViewJob(false);
+    setJobData(job);
+    nav("/postnewjob");
   };
 
   const hideModal = () => {
@@ -88,6 +95,7 @@ const PostedJobs = ({ employerData, setEmployerData, setChangeEmployer }) => {
                       onClick={(e) => {
                         setViewJob(true);
                         setItemDelete(item);
+                        setJob(item);
                       }}
                     >
                       View

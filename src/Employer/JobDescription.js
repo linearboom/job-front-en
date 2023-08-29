@@ -157,7 +157,7 @@ const JobDescription = ({ jobData, jobDescriptionFetchData, setChangeJob }) => {
               <div className="row d-flex justify-content-between bg-light">
                 <span className="col-8 d-flex justify-content-start">
                   {jobDescriptionData.location
-                    ? jobDescriptionData.location
+                    ? jobDescriptionData.location.locationName
                     : "not mentioned"}
                 </span>
               </div>

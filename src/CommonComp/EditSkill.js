@@ -4,24 +4,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 import React, { useState } from "react";
 
-const EditSkill = ({ jobData, setJobData }) => {
-  const [skill, setSkill] = useState([
-    // {
-    //   skillSetId: 5,
-    //   skillName: "Spring",
-    //   skillApproved: "1",
-    // },
-    // {
-    //   skillSetId: 6,
-    //   skillName: "Spring Boot",
-    //   skillApproved: "1",
-    // },
-    // {
-    //   skillSetId: 8,
-    //   skillName: "Market Research",
-    //   skillApproved: "1",
-    // },
-  ]);
+const EditSkill = ({ jobData, setJobData, setChangeEmployer }) => {
+  const [skill, setSkill] = useState(jobData.skills || []);
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const jobId = queryParams.get("jobId");
@@ -41,7 +25,7 @@ const EditSkill = ({ jobData, setJobData }) => {
   };
 
   const handleDelete = (item) => {
-    alert(item.skillName);
+    //alert(item.skillName);
   };
 
   const handleDeleteLocal = (item) => {
@@ -69,7 +53,7 @@ const EditSkill = ({ jobData, setJobData }) => {
       let res = await axios.post(API_URL, data, { withCredentials: true });
       console.log("Hello");
       if (res.data) {
-        alert(res.data.jobID);
+        setChangeEmployer(true);
         nav("/postedjobs");
       } else {
         alert("Session Expired");
@@ -94,22 +78,23 @@ const EditSkill = ({ jobData, setJobData }) => {
           </tr>
         </thead>
         <tbody>
-          {skill.map((item, index) => (
-            <tr key={item.skillSetId}>
-              <td>{index}</td>
-              <td>{item.skillName}</td>
-              <td>
-                <button
-                  id="delete-skill-button"
-                  style={{ backgroundColor: "red" }}
-                  className="btn btn-bg-success "
-                  onClick={() => handleDelete(item)}
-                >
-                  Delete
-                </button>
-              </td>
-            </tr>
-          ))}
+          {skill.length &&
+            skill.map((item, index) => (
+              <tr key={item.skillSetId}>
+                <td>{index + 1}</td>
+                <td>{item.skillSet?.skillName}</td>
+                <td>
+                  <button
+                    id="delete-skill-button"
+                    style={{ backgroundColor: "red" }}
+                    className="btn btn-bg-success "
+                    onClick={() => handleDelete(item)}
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
         </tbody>
       </table>
       <h4>New Skills</h4>

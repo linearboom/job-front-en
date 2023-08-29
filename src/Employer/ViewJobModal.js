@@ -33,7 +33,7 @@ const ViewJobModal = ({ showModal, hideModal, handleEdit, item, message }) => {
             </div>
             <div className="d-flex m-2 px-4 justify-content-between bg-light">
               <div className="fw-semibold">Post Available:</div>
-              <div className="mx-2">{item.jobDescription}</div>
+              <div className="mx-2">{item.postAvailable}</div>
             </div>
             <div className="d-flex m-2 px-4 justify-content-between bg-light">
               <div className="fw-semibold">Job Type:</div>
@@ -45,7 +45,7 @@ const ViewJobModal = ({ showModal, hideModal, handleEdit, item, message }) => {
             </div>
             <div className="d-flex m-2 px-4 justify-content-between bg-light">
               <div className="fw-semibold">Location:</div>
-              <div className="mx-2">{item.location}</div>
+              <div className="mx-2">{item.location?.locationName}</div>
             </div>
             <div className="d-flex m-2 px-4 justify-content-between bg-light">
               <div className="fw-semibold">Posting Date:</div>

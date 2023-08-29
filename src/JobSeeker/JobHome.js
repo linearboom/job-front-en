@@ -51,7 +51,7 @@ const JobHome = ({ userData, jobData, setJobData }) => {
             </form>
           </div>
           <div>
-            {searchresult.length > 1 ? (
+            {searchresult.length ? (
               searchresult.map((item) => (
                 <div key={item.jobId}>
                   <JobCard job={item} setJobData={setJobData}></JobCard>
