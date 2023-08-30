@@ -1,12 +1,100 @@
 import React from "react";
+
 // import "owl.carousel/dist/assets/owl.carousel.css"; // Import Owl Carousel CSS
 // import "owl.carousel/dist/assets/owl.theme.default.css"; // Import Owl Carousel Default Theme CSS
 // import OwlCarousel from "react-owl-carousel"; // Import React Owl Carousel
 // import "../style.css";
 //import Search from "./Search";
 
+import "../style.css";
+
 const Home = () => {
-  return <div></div>;
+  return (
+    <div className="home-container">
+      <div
+        id="carouselExampleInterval"
+        className="carousel slide"
+        data-bs-ride="carousel"
+      >
+        <div className="carousel-inner">
+          <div className="carousel-item active" data-bs-interval="10000">
+            <img
+              src="./images/carousel-1.jpg"
+              className="d-block w-100"
+              alt="Find The Perfect Job"
+            />
+            <div className="carousel-caption">
+              <h1 id="header-carousel-1234" className="carousel-title">
+                Find The Perfect Job
+              </h1>
+              <p id="main-cara-123" className="carousel-description">
+                Create a free account, complete your profile, and get matched
+                with your dream job.
+              </p>
+              <div className="carousel-buttons">
+                <a href="#" className="btn btn-primary me-3">
+                  Search A Job
+                </a>
+                <a href="#" className="btn btn-secondary">
+                  Find A Talent
+                </a>
+              </div>
+            </div>
+          </div>
+          {/* You can add more carousel items here */}
+          {
+            <div className="carousel-item" data-bs-interval="2000">
+              <img
+                src="./images/carousel-2.jpg"
+                className="d-block w-100"
+                alt="Find The Best Startup Job"
+              />
+              <div className="carousel-caption">
+                <h1 className="carousel-title">Find The Best Startup Job</h1>
+                <p className="carousel-description">
+                  Create a free account, complete your profile, and get matched
+                  with your dream job.
+                </p>
+                <div className="carousel-buttons">
+                  <a href="#" className="btn btn-primary me-3">
+                    Search A Job
+                  </a>
+                  <a href="#" className="btn btn-secondary">
+                    Find A Talent
+                  </a>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+        {/* Carousel controls */}
+        <button
+          className="carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselExampleInterval"
+          data-bs-slide="prev"
+        >
+          <span
+            className="carousel-control-prev-icon"
+            aria-hidden="true"
+          ></span>
+          <span className="visually-hidden">Previous</span>
+        </button>
+        <button
+          className="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselExampleInterval"
+          data-bs-slide="next"
+        >
+          <span
+            className="carousel-control-next-icon"
+            aria-hidden="true"
+          ></span>
+          <span className="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+  );
 };
 
 export default Home;

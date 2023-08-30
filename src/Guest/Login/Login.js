@@ -94,7 +94,7 @@ const Login = ({ setUserData }) => {
             width="50px"
             style={{ marginTop: "40px" }}
           />
-          <h4 style={{ marginTop: "20px" }}>Login</h4>
+          <h4 style={{ marginTop: "20px" }}>Job Seeker Login</h4>
           <p className="my-4">Use your email address to continue</p>
           <form
             id="loginform"

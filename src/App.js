@@ -18,6 +18,8 @@ import PostNewJob from "./Employer/PostNewJob";
 import EditSkill from "./CommonComp/EditSkill";
 import PostedJobs from "./Employer/PostedJobs";
 import JobCard from "./Employer/JobCard";
+import Body from "./ResumeGenerator/components/Body/Body";
+import Header from "./ResumeGenerator/components/Header/Header";
 
 import "./style.css";
 import Home from "./Guest/Home";
@@ -26,6 +28,8 @@ import Contact from "./Guest/Contact";
 import AppliedJob from "./JobSeeker/AppliedJob";
 import EmployerProfile from "./Employer/EmployerProfileChange";
 import JobDescription from "./Employer/JobDescription";
+import Footer from "./Guest/Footer";
+import NewNavbar from "./Guest/NewNavbar";
 
 const ProtectedRoute = ({ employerData, element }) => {
   if (employerData) {
@@ -102,7 +106,7 @@ function App() {
   return (
     <div className="App">
       {!userData && !employerData && !adminData ? (
-        <GuestTopperNav></GuestTopperNav>
+        <NewNavbar></NewNavbar>
       ) : userData ? (
         <JobSeekerNav
           userData={userData}
@@ -140,14 +144,26 @@ function App() {
           element={<Contact setUserData={setUserData} />}
         ></Route>
         {/* {Job Seeker Routes Create a protected route for the same} */}
+
         <Route
           path="jobhome"
-          element={<JobHome userData={userData} setJobData={setJobData} />}
+          element={
+            <ProtectedJob
+              element={<JobHome userData={userData} setJobData={setJobData} />}
+              userData={userData}
+            ></ProtectedJob>
+          }
         ></Route>
+
         <Route
           path="jobprofile"
           element={
-            <JobProfile userData={userData} setChangeJob={setChangeJob} />
+            <ProtectedJob
+              element={
+                <JobProfile userData={userData} setChangeJob={setChangeJob} />
+              }
+              userData={userData}
+            ></ProtectedJob>
           }
         ></Route>
         <Route
@@ -247,9 +263,21 @@ function App() {
             ></ProtectedRoute>
           }
         ></Route>
-        <Route path="/resume" element={<Resume></Resume>}></Route>
-        <Route path="*" element={<h1>No path</h1>}></Route>
+        <Route
+          path="/resume"
+          element={
+            <div className="App">
+              <Header />
+              <Body />
+            </div>
+          }
+        ></Route>
+        <Route
+          path="*"
+          element={<h1 style={{ marginTop: "80px" }}>No path</h1>}
+        ></Route>
       </Routes>
+      {!userData && !employerData && <Footer></Footer>}
     </div>
   );
 }

@@ -60,7 +60,7 @@ const JobSeekerNav = ({ userData, setUserData }) => {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="dashboard.html">
+                <Link className="nav-link" to="resume">
                   Resume Generator
                 </Link>
               </li>

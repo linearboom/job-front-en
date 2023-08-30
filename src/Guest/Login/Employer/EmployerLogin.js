@@ -142,7 +142,7 @@ const EmployerLogin = ({ employerData, setEmployerData }) => {
               </button>
             </div>
           </form>
-          <form action="registerjobseeker">
+          <form action="registeremployer">
             Don't have an account?
             <button
               className="btn btn-link mt-0"

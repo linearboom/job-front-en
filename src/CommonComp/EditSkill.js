@@ -1,6 +1,8 @@
 import { Autocomplete, TextField } from "@mui/material";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 import React, { useState } from "react";
 
@@ -66,7 +68,7 @@ const EditSkill = ({ jobData, setJobData, setChangeEmployer }) => {
   const [skill1, set] = useState(["Hello", "Helll", 3, 4, 5, 6]);
 
   return (
-    <div style={{ marginTop: "80px" }}>
+    <div className="Align-Center" style={{ marginTop: "80px" }}>
       <h4>Existing Skills</h4>
       <table className="table table-striped" style={{ textAlign: "center" }}>
         <thead>
@@ -144,10 +146,16 @@ const EditSkill = ({ jobData, setJobData, setChangeEmployer }) => {
             }}
             value={inputSkill}
           />
-          <button className=" col-1">Add Skill</button>
+          <button className="col-1 btn btn-outline-secondary bg-success text-white">
+            Add Skill
+          </button>
         </div>
       </form>
-      <button onClick={handleUpdate} style={{ marginTop: "50px" }}>
+      <button
+        className="btn btn-outline-secondary bg-success text-white "
+        onClick={handleUpdate}
+        style={{ marginTop: "50px" }}
+      >
         Update Skills
       </button>
     </div>

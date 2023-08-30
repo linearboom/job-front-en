@@ -47,11 +47,11 @@ const EmployerNav = ({ setEmployerData }) => {
           </button>
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <Link className="nav-link" to="EmployerHome">
                   Employer Home
                 </Link>
-              </li>
+              </li> */}
               <li className="nav-item">
                 <Link className="nav-link" to="employerprofile">
                   Profile
