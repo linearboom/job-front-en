@@ -32,6 +32,7 @@ const JobProfile = ({ userData, setJobData, setChangeJob }) => {
   const [profileImage, setProfileImage] = useState();
   const [resumeHeadline, setResumeHeadline] = useState();
   const [file, setFile] = useState();
+  const [resumeURL, setResumeURL] = useState();
 
   const RESUME_URL = "http://localhost:8181/job_seeker/uploadResume";
 
@@ -58,6 +59,28 @@ const JobProfile = ({ userData, setJobData, setChangeJob }) => {
         console.error("Error fetching image:", error);
       });
   }, []);
+
+  const downloadResume = (e) => {
+    e.preventDefault();
+    const resumeFilePath = userData.resumePath;
+    axios
+      .get(
+        `http://localhost:8181/job_seeker/getProfileImage?imagePath=${resumeFilePath}`,
+        { responseType: "blob" }
+      )
+      .then((response) => {
+        const blob = new Blob([response.data], { type: "application/pdf" });
+        const url = URL.createObjectURL(blob);
+        setResumeURL(url);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "Resume";
+        link.click();
+      })
+      .catch((error) => {
+        console.error("Error fetching file:", error);
+      });
+  };
 
   const uploadResumeSubmit = async (e) => {
     e.preventDefault();
@@ -166,6 +189,7 @@ const JobProfile = ({ userData, setJobData, setChangeJob }) => {
 
               <div className="card-header bg-warning d-flex justify-content-between">
                 <p className="card-title fw-bold">Resume</p>
+                <button onClick={downloadResume}>Download Resume</button>
                 <form onSubmit={uploadResumeSubmit}>
                   <div className="form-elem mb-3">
                     <label htmlFor="" className="form-label">
@@ -176,7 +200,7 @@ const JobProfile = ({ userData, setJobData, setChangeJob }) => {
                       type="file"
                       className="form-control image"
                       id=""
-                      accept="image/*"
+                      accept="pdf/*"
                       onChange={(e) => {
                         setFile(e.target.files[0]);
                       }}
