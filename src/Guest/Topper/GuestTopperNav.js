@@ -42,11 +42,6 @@ const GuestTopperNav = () => {
                     Contact
                   </a>
                 </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="l">
-                    Services
-                  </a>
-                </li>
               </ul>
               <form action="login">
                 <button className="login-btn">Login</button>

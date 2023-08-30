@@ -61,7 +61,7 @@ const JobSeekerNav = ({ userData, setUserData }) => {
               </li>
               <li className="nav-item">
                 <Link className="nav-link" to="dashboard.html">
-                  DashBoard
+                  Resume Generator
                 </Link>
               </li>
             </ul>

@@ -23,55 +23,62 @@ const JobDescription = ({ jobData, jobDescriptionFetchData, setChangeJob }) => {
     }
   };
 
-  useEffect(() => {
-    const fetchJobDescriptionData = async () => {
-      try {
-        let res = await axios.post(URL, jobDescriptionFetchData, {
-          withCredentials: true,
-        });
-        // console.log("Hello");
-        if (res.data) {
-          setJobDescriptionData(res.data);
-          const imagePath = res.data.profileImagePath;
-          // axios
-          //   .get(
-          //     //change for company profile image
-          //     `http://localhost:8181/job_seeker/getProfileImage?imagePath=${imagePath}`,
-          //     {
-          //       responseType: "arraybuffer", // Set the response type to 'arraybuffer' for binary data
-          //     }
-          //   )
-          //   .then((response) => {
-          //     // Convert the binary image data to a Data URL using the FileReader API
-          //     const blob = new Blob([response.data], { type: "image/jpeg" }); // Change the content type if needed
-          //     const reader = new FileReader();
+  // useEffect(() => {
+  //   const fetchJobDescriptionData = async () => {
+  //     try {
+  //       let res = await axios.post(URL, jobDescriptionFetchData, {
+  //         withCredentials: true,
+  //       });
+  //       // console.log("Hello");
+  //       if (res.data) {
+  //         setJobDescriptionData(res.data);
+  //         const imagePath = res.data.profileImagePath;
+  //         // axios
+  //         //   .get(
+  //         //     //change for company profile image
+  //         //     `http://localhost:8181/job_seeker/getProfileImage?imagePath=${imagePath}`,
+  //         //     {
+  //         //       responseType: "arraybuffer", // Set the response type to 'arraybuffer' for binary data
+  //         //     }
+  //         //   )
+  //         //   .then((response) => {
+  //         //     // Convert the binary image data to a Data URL using the FileReader API
+  //         //     const blob = new Blob([response.data], { type: "image/jpeg" }); // Change the content type if needed
+  //         //     const reader = new FileReader();
 
-          //     reader.onload = () => {
-          //       const imageUrl = reader.result;
-          //       setProfileImage(imageUrl);
-          //     };
+  //         //     reader.onload = () => {
+  //         //       const imageUrl = reader.result;
+  //         //       setProfileImage(imageUrl);
+  //         //     };
 
-          //     reader.readAsDataURL(blob);
-          //   })
-          //   .catch((error) => {
-          //     console.error("Error fetching image:", error);
-          //   });
-        } else {
-          alert("Session Expired");
-        }
-      } catch {
-        alert("Connection to the Server Failed");
-      }
-    };
+  //         //     reader.readAsDataURL(blob);
+  //         //   })
+  //         //   .catch((error) => {
+  //         //     console.error("Error fetching image:", error);
+  //         //   });
+  //       } else {
+  //         alert("Session Expired");
+  //       }
+  //     }
+  //     catch {
+  //       alert("Connection to the Server Failed");
+  //     }
+  //   };
 
-    fetchJobDescriptionData();
-  }, []);
+  //   fetchJobDescriptionData();
+  // }, []);
 
   return (
-    <div style={{ marginTop: "80px", margingLeft: "10px" }}>
+    <div
+      style={{
+        marginTop: "100px",
+        margingLeft: "10px",
+        height: "900px",
+      }}
+    >
       {jobDescriptionData ? (
-        <div className="row">
-          <div className="col-4">
+        <div className="row shadow-lg ">
+          <div className="col-4 ms-5 fs-5 rounded-4 bg-light">
             <div className="d-flex justify-content-center">
               {/* <img
                 key={profileImage}
@@ -84,49 +91,60 @@ const JobDescription = ({ jobData, jobDescriptionFetchData, setChangeJob }) => {
                 }}
               /> */}
             </div>
-            <div className="d-flex justify-content-between bg-light">
-              <p className="fw-semibold">Job ID</p>
-              <p className="mx-2">{jobDescriptionData.jobId}</p>
-            </div>
-            <div className="d-flex justify-content-between bg-light">
-              <p className="fw-semibold">Job Title</p>
-              <p className="mx-2">{jobDescriptionData.jobTitle}</p>
-            </div>
-            <div className="d-flex justify-content-between bg-light">
-              <p className="fw-semibold">Post Availabale</p>
-              <p className="mx-2">{jobDescriptionData.postAvail}</p>
-            </div>
-            <div className="d-flex justify-content-between bg-light">
-              <p className="fw-semibold">Job Type</p>
-              <p className="mx-2">{jobDescriptionData.jobType.roleName}</p>
-            </div>
-            <div>
-              <pre className="col-8 d-flex justify-content-start">
-                <h6 style={{ fontWeight: "bold" }}>Job Description :</h6>{" "}
-                {jobDescriptionData.jobDescription}
-              </pre>
-            </div>
+            <div className="text-center fst-italic fs-1">APPLY FOR A JOB</div>
 
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <button
-                onClick={apply}
-                style={{ borderRadius: "10px", border: "solid" }}
-              >
-                Apply
-              </button>
+            {/* adding card */}
+
+            <div class="card text-center ">
+              <div class="card-header">
+                <ul class="nav nav-pills card-header-pills"></ul>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title fs-3 fst-italic">Job Information</h5>
+                <div>
+                  <div className="d-flex justify-content-between ">
+                    <p className="fw-semibold">Job ID</p>
+                    <p className="mx-2">{jobDescriptionData.jobId}</p>
+                  </div>
+                  <div className="d-flex justify-content-between ">
+                    <p className="fw-semibold">Job Title</p>
+                    <p className="mx-2">{jobDescriptionData.jobTitle}</p>
+                  </div>
+                  <div className="d-flex justify-content-between ">
+                    <p className="fw-semibold">Post Availabale</p>
+                    <p className="mx-2">{jobDescriptionData.postAvail}</p>
+                  </div>
+                  <div className="d-flex justify-content-between">
+                    <p className="fw-semibold">Job Type</p>
+                    <p className="mx-2">
+                      {jobDescriptionData.jobType.roleName}
+                    </p>
+                  </div>
+                  <div className="d-flex justify-content-between fw-semibold">
+                    Job Description :
+                  </div>
+                  <div className="d-flex bg-light text-start fs-5 mt-2">
+                    {jobDescriptionData.jobDescription}
+                  </div>
+                </div>
+
+                <button
+                  class="btn btn-primary mt-3 form-control fw-bold"
+                  onClick={apply}
+                  style={{ backgroundColor: "#ffd400" }}
+                >
+                  Apply
+                </button>
+              </div>
             </div>
           </div>
 
           {/* Right Side */}
-          <div className="row col-8">
+          <div className="row col-6 bg-light ms-4 rounded-4 shadow-lg">
             {/* Skills */}
-            <div className="">
+            <div className="text-center fst-italic fs-1">Job Description</div>
+
+            <div className="border rounded-3 fs-5">
               <span className="card-title fw-bold">Skills</span>
               {jobDescriptionData.skills &&
                 jobDescriptionData.skills.map((item, index) => (
@@ -139,25 +157,24 @@ const JobDescription = ({ jobData, jobDescriptionFetchData, setChangeJob }) => {
             </div>
 
             {/* Designation */}
-            <div className="">
+            <div className="border rounded-3 fs-5">
               <span className="card-title fw-bold">Designation</span>
 
               <div className="row d-flex justify-content-between bg-light">
                 <span className="col-8 d-flex justify-content-start">
-                  <p style={{ fontWeight: "bold" }}>Designation :</p>{" "}
                   {jobDescriptionData.designation.designationName}
                 </span>
               </div>
             </div>
 
             {/* Location */}
-            <div className="">
+            <div className="border rounded-3 fs-5">
               <span className="card-title fw-bold">Location</span>
 
               <div className="row d-flex justify-content-between bg-light">
                 <span className="col-8 d-flex justify-content-start">
                   {jobDescriptionData.location
-                    ? jobDescriptionData.location.locationName
+                    ? jobDescriptionData.locationName
                     : "not mentioned"}
                 </span>
               </div>
@@ -165,7 +182,7 @@ const JobDescription = ({ jobData, jobDescriptionFetchData, setChangeJob }) => {
 
             {/* "jobPostingDate": "2023-08-23",
                 "lastApplyDate": null, */}
-            <div className="">
+            <div className="border rounded-3 fs-5">
               <span className="card-title fw-bold">Dates</span>
               <div className="row d-flex justify-content-between bg-light">
                 <span className="col-8 d-flex justify-content-start">
@@ -181,7 +198,7 @@ const JobDescription = ({ jobData, jobDescriptionFetchData, setChangeJob }) => {
 
             {/* "minSalary": 0.0,
                 "maxSalary": 10000.0,*/}
-            <div className="">
+            <div className="border rounded-3 fs-5">
               <span className="card-title fw-bold">Salary</span>
               <div className="row d-flex justify-content-between bg-light">
                 <span className="col-8 d-flex justify-content-start">
@@ -197,7 +214,7 @@ const JobDescription = ({ jobData, jobDescriptionFetchData, setChangeJob }) => {
 
             {/* "minExperience": 0,
                 "maxExperience": 2,*/}
-            <div className="">
+            <div className="border rounded-3 fs-5">
               <span className="card-title fw-bold">Experience</span>
               <div className="row d-flex justify-content-between bg-light">
                 <span className="col-8 d-flex justify-content-start">
@@ -213,7 +230,7 @@ const JobDescription = ({ jobData, jobDescriptionFetchData, setChangeJob }) => {
 
             {/* "qualificationType": null,
                 "qualificationType2": null,*/}
-            <div className="">
+            <div className="border rounded-3 fs-5">
               <span className="card-title fw-bold">Qualifications</span>
 
               <div className="row d-flex justify-content-between bg-light">
