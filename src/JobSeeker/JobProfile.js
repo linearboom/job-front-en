@@ -79,6 +79,7 @@ const JobProfile = ({ userData, setJobData, setChangeJob }) => {
       })
       .catch((error) => {
         console.error("Error fetching file:", error);
+        alert("You do not have any resume uploaded in the system");
       });
   };
 

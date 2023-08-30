@@ -30,6 +30,7 @@ const Applications = ({ job, setViewApplicants, setChangeEmployer }) => {
     fetchData();
   }, []);
 
+
   const fetchApplicantData = (e, item) => {
     const data = {
       jobId: job.jobId,

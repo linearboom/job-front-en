@@ -76,6 +76,34 @@ const ApplicantProfileComponent = ({
     setChangeEmployer(true);
   };
 
+  // Downlaod Resume
+  const downloadResume = (e) => {
+    e.preventDefault();
+    const resumeFilePath = applicationData.resumePath;
+    axios
+      .get(
+        `http://localhost:8181/job_seeker/getProfileImage?imagePath=${resumeFilePath}`,
+        { responseType: "blob" }
+      )
+      .then((response) => {
+        const blob = new Blob([response.data], { type: "application/pdf" });
+
+        const reader = new FileReader();
+        reader.onload = () => {
+          const link = document.createElement("a");
+          link.href = reader.result; // Use the base64 data URL from the FileReader
+          link.download = "Resume.pdf";
+          link.click();
+        };
+
+        reader.readAsDataURL(blob);
+      })
+      .catch((error) => {
+        console.error("Error fetching file:", error);
+        alert("You do not have any resume uploaded in the system");
+      });
+  };
+
   return (
     <div>
       {applicationData ? (
@@ -135,7 +163,9 @@ const ApplicantProfileComponent = ({
                     : "Click on View Contact Details"}
                 </p>
               </div>
-              <button onClick={(e) => {}}>Short List Canditate</button>
+              <button onClick={downloadResume}>
+                Download Canditate Resume
+              </button>
             </div>
           </div>
           <div className="row col-8">
@@ -258,7 +288,7 @@ const ApplicantProfileComponent = ({
                     </pre>
                     <span className="col-8 d-flex justify-content-start">
                       <p style={{ fontWeight: "bold" }}>URL :</p>
-                      {item.url}
+                      <a href={item.url}>{item.url}</a>
                     </span>
                     <br></br>
                   </div>
