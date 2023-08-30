@@ -189,8 +189,8 @@ const JobProfile = ({ userData, setJobData, setChangeJob }) => {
               {/* Resume File Upload */}
 
               <div className="card-header bg-warning d-flex justify-content-between">
-                <p className="card-title fw-bold">Resume</p>
-                <button onClick={downloadResume}>Download Resume</button>
+                <span className="card-title fw-bold">Resume</span>
+
                 <form onSubmit={uploadResumeSubmit}>
                   <div className="form-elem mb-3">
                     <label htmlFor="" className="form-label">
@@ -206,7 +206,15 @@ const JobProfile = ({ userData, setJobData, setChangeJob }) => {
                         setFile(e.target.files[0]);
                       }}
                     />
-                    <button type="submit">Submit</button>
+                    <button className="btn btn-success mt-3" type="submit">
+                      Submit
+                    </button>
+                    <button
+                      className="btn btn-primary ms-4 mt-3"
+                      onClick={downloadResume}
+                    >
+                      Download Resume
+                    </button>
                   </div>
                 </form>
               </div>

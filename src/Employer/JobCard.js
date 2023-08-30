@@ -77,10 +77,7 @@ const JobCard = ({ job, setJobData, showApplyModal, setShowApplyModal }) => {
   };
 
   return (
-    <div
-      className="FARCARD"
-      style={{ marginLeft: "200px", marginRight: "200px" }}
-    >
+    <div className="FARCARD" style={{}}>
       <div
         className="job-item p-4 mb-4"
         style={{

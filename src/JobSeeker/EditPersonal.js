@@ -267,9 +267,16 @@ const EditPersonal = ({ setModal, setChangeJob, userData }) => {
 
   const editProfile = async (e) => {
     e.preventDefault();
+    const formData = {
+      jobId: userData.jobId,
+      lastName: localData.lastName,
+      firstName: localData.firstName,
+      currentDesignation: localData.designation,
+      mobile: localData.mobile,
+    };
     const form = new FormData();
     form.append("file", file);
-    const jobSeeker = JSON.stringify(localData);
+    const jobSeeker = JSON.stringify(formData);
     form.append("jobSeeker", jobSeeker);
 
     try {
@@ -436,6 +443,9 @@ const EditPersonal = ({ setModal, setChangeJob, userData }) => {
                     onkeyup="generateCV()"
                     placeholder="e.g. 456-768-798, 567.654.002"
                     value={localData.mobile}
+                    onChange={(e) => {
+                      setLocalData({ ...localData, mobile: e.target.value });
+                    }}
                   />
                   <span className="form-text" />
                 </div>

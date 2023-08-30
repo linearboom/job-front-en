@@ -10,6 +10,12 @@ const JobHome = ({ userData, jobData, setJobData }) => {
   const [searchJobTitle, setSearchJobTitle] = useState("");
   const [searchresult, setSearchResult] = useState([]);
 
+  //Pagination States
+  // const [data, setdata] = useState([]);
+  // const [pageData, setPageData] = useState([]);
+  // const [page, setPage] = useState(1);
+  // const [pageCount, setPageCount] = useState(0);
+
   const search = async (e) => {
     e.preventDefault();
     const fetchData = async () => {
