@@ -3,7 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 
 // Componenet not being used
-const EditPersonal = ({ setModal }) => {
+const EditPersonal = ({ setModal, setChangeJob, userData }) => {
   // Dummy Data
   const userData1 = {
     jobSeekerId: 1,
@@ -261,18 +261,30 @@ const EditPersonal = ({ setModal }) => {
     field2: null,
   };
 
-  const [localData, setLocalData] = useState(userData1);
-  const API_URL = "http://localhost:8181/job_seeker/updatePersonalProfile";
+  const [localData, setLocalData] = useState(userData);
+  const API_URL = "http://localhost:8181/job_seeker/updatePersonalProfileImage";
+  const [file, setFile] = useState();
 
   const editProfile = async (e) => {
     e.preventDefault();
+    const form = new FormData();
+    form.append("file", file);
+    const jobSeeker = JSON.stringify(localData);
+    form.append("jobSeeker", jobSeeker);
 
     try {
-      let res = await axios.post(API_URL, localData, { withCredentials: true });
+      let res = await axios.post(API_URL, form, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        withCredentials: true, // Enable sending and receiving cookies
+      });
 
       if (res.data) {
         //nav(`/editskilltest?jobId=${res.data.JobId}`);
         alert(res.data);
+        setChangeJob(true);
+        setModal(null);
       } else {
         alert("Session Expired");
       }
@@ -355,7 +367,9 @@ const EditPersonal = ({ setModal }) => {
                     className="form-control image"
                     id=""
                     accept="image/*"
-                    onchange="previewImage()"
+                    onChange={(e) => {
+                      setFile(e.target.files[0]);
+                    }}
                   />
                 </div>
                 <div className="form-elem mb-3">

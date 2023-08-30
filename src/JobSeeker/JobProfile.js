@@ -18,6 +18,8 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import BorderStyle from "pdf-lib/cjs/core/annotation/BorderStyle";
 import axios from "axios";
+import Summary from "./Summary";
+import PostData from "../Util/PostData";
 // import "./JobProfile.css";
 
 const JobProfile = ({ userData, setJobData, setChangeJob }) => {
@@ -28,6 +30,10 @@ const JobProfile = ({ userData, setJobData, setChangeJob }) => {
   const [certification, setCertification] = useState();
   const [education, setEducation] = useState();
   const [profileImage, setProfileImage] = useState();
+  const [resumeHeadline, setResumeHeadline] = useState();
+  const [file, setFile] = useState();
+
+  const RESUME_URL = "http://localhost:8181/job_seeker/uploadResume";
 
   const showModal = (e, item) => {
     setModal(item);
@@ -52,6 +58,31 @@ const JobProfile = ({ userData, setJobData, setChangeJob }) => {
         console.error("Error fetching image:", error);
       });
   }, []);
+
+  const uploadResumeSubmit = async (e) => {
+    e.preventDefault();
+    const form = new FormData();
+    form.append("file", file);
+    try {
+      let res = await axios.post(RESUME_URL, form, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        withCredentials: true, // Enable sending and receiving cookies
+      });
+
+      if (res.data) {
+        //nav(`/editskilltest?jobId=${res.data.JobId}`);
+        alert(res.data);
+        setChangeJob(true);
+        setModal(null);
+      } else {
+        alert("Session Expired");
+      }
+    } catch {
+      alert("Connection to the Server Failed");
+    }
+  };
 
   return (
     <div className="row justify-content-center ">
@@ -115,7 +146,10 @@ const JobProfile = ({ userData, setJobData, setChangeJob }) => {
                 <div>
                   <FontAwesomeIcon
                     className="btn btn-lg"
-                    onClick={(e) => showModal(e, "summary")}
+                    onClick={(e) => {
+                      showModal(e, "summary");
+                      setResumeHeadline(userData.resumeHeadline);
+                    }}
                     icon={faPenToSquare}
                   />
                 </div>
@@ -126,6 +160,30 @@ const JobProfile = ({ userData, setJobData, setChangeJob }) => {
                     ? userData.resumeHeadline
                     : "No Summary"}
                 </pre>
+              </div>
+
+              {/* Resume File Upload */}
+
+              <div className="card-header bg-warning d-flex justify-content-between">
+                <p className="card-title fw-bold">Resume</p>
+                <form onSubmit={uploadResumeSubmit}>
+                  <div className="form-elem mb-3">
+                    <label htmlFor="" className="form-label">
+                      Your Resume
+                    </label>
+                    <input
+                      name="image"
+                      type="file"
+                      className="form-control image"
+                      id=""
+                      accept="image/*"
+                      onChange={(e) => {
+                        setFile(e.target.files[0]);
+                      }}
+                    />
+                    <button type="submit">Submit</button>
+                  </div>
+                </form>
               </div>
 
               {/* skill */}
@@ -217,6 +275,15 @@ const JobProfile = ({ userData, setJobData, setChangeJob }) => {
                             <FontAwesomeIcon
                               className="btn text-danger btn-lg"
                               icon={faTrash}
+                              onClick={async (e) => {
+                                //alert("Hello");
+                                let data = await PostData(
+                                  "http://localhost:8181/job_seeker/deleteEducation",
+                                  item
+                                );
+                                alert(data);
+                                setChangeJob(true);
+                              }}
                             />
                           </Col>
                         </Row>
@@ -276,6 +343,15 @@ const JobProfile = ({ userData, setJobData, setChangeJob }) => {
                             <FontAwesomeIcon
                               className="btn text-danger btn-lg"
                               icon={faTrash}
+                              onClick={async (e) => {
+                                //alert("Hello");
+                                let data = await PostData(
+                                  "http://localhost:8181/job_seeker/deleteWorkExp",
+                                  item
+                                );
+                                alert(data);
+                                setChangeJob(true);
+                              }}
                             />
                           </Col>
                         </Row>
@@ -346,6 +422,15 @@ const JobProfile = ({ userData, setJobData, setChangeJob }) => {
                             <FontAwesomeIcon
                               className="btn text-danger btn-lg"
                               icon={faTrash}
+                              onClick={async (e) => {
+                                //alert("Hello");
+                                let data = await PostData(
+                                  "http://localhost:8181/job_seeker/deleteProject",
+                                  item
+                                );
+                                alert(data);
+                                setChangeJob(true);
+                              }}
                             />
                           </div>
                         </div>
@@ -402,6 +487,15 @@ const JobProfile = ({ userData, setJobData, setChangeJob }) => {
                           <FontAwesomeIcon
                             className="btn text-danger btn-lg"
                             icon={faTrash}
+                            onClick={async (e) => {
+                              //alert("Hello");
+                              let data = await PostData(
+                                "http://localhost:8181/job_seeker/deleteAccomplishment",
+                                item
+                              );
+                              alert(data);
+                              setChangeJob(true);
+                            }}
                           />
                         </div>
                       </div>
@@ -455,6 +549,15 @@ const JobProfile = ({ userData, setJobData, setChangeJob }) => {
                           <FontAwesomeIcon
                             className="btn text-danger btn-lg"
                             icon={faTrash}
+                            onClick={async (e) => {
+                              //alert("Hello");
+                              let data = await PostData(
+                                "http://localhost:8181/job_seeker/deleteCertification",
+                                item
+                              );
+                              alert(data);
+                              setChangeJob(true);
+                            }}
                           />
                         </div>
                       </div>
@@ -481,6 +584,7 @@ const JobProfile = ({ userData, setJobData, setChangeJob }) => {
                 <EditPersonal
                   setModal={setModal}
                   setChangeJob={setChangeJob}
+                  userData={userData}
                 ></EditPersonal>
               )}
             </div>
@@ -537,6 +641,15 @@ const JobProfile = ({ userData, setJobData, setChangeJob }) => {
                   certification={certification}
                   setChangeJob={setChangeJob}
                 ></Certification>
+              )}
+            </div>
+            <div>
+              {modal === "summary" && (
+                <Summary
+                  setModal={setModal}
+                  summary={resumeHeadline}
+                  setChangeJob={setChangeJob}
+                ></Summary>
               )}
             </div>
           </div>

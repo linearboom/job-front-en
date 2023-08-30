@@ -35,6 +35,7 @@ const Applications = ({ job, setViewApplicants, setChangeEmployer }) => {
       jobId: job.jobId,
       applicationId: item.applicationId,
       jobSeekerId: item.jobSeekerDTO.jobSeekerId,
+      application: item,
     };
     setApplicantFetchData(data);
   };
@@ -71,8 +72,8 @@ const Applications = ({ job, setViewApplicants, setChangeEmployer }) => {
                       <td>{item.applicationId}</td>
                       <td>{item.jobSeekerDTO.firstName}</td>
                       <td>{item.applyDate.slice(0, 10)}</td>
-                      <td>{item.isContacted ? "YES" : "NO"}</td>
-                      <td>{item.isShortlist ? "YES" : "NO"}</td>
+                      <td>{item.isContacted == 1 ? "YES" : "NO"}</td>
+                      <td>{item.isShortlist == 1 ? "YES" : "NO"}</td>
                       <td>
                         <button
                           onClick={(e) => {

@@ -9,6 +9,10 @@ const ApplicantProfileComponent = ({
   const URL = "http://localhost:8181/employer/viewApplicant";
   const [applicationData, setApplicationData] = useState();
   const [profileImage, setProfileImage] = useState();
+  const [email, setEmail] = useState();
+  const [mobile, setMobile] = useState();
+
+  const URL_VIEWCONTACT = "http://localhost:8181/employer/showContact";
 
   useEffect(() => {
     const fetchApplicantData = async () => {
@@ -53,6 +57,25 @@ const ApplicantProfileComponent = ({
     fetchApplicantData();
   }, []);
 
+  // View Contact
+  const viewContact = async (e) => {
+    const data = { ...applicantFetchData, showContact: true };
+    try {
+      let res = await axios.post(URL, data, {
+        withCredentials: true,
+      });
+      // console.log("Hello");
+      if (res.data) {
+        setApplicationData(res.data);
+      } else {
+        alert("Session Expired");
+      }
+    } catch {
+      alert("Connection to the Server Failed");
+    }
+    setChangeEmployer(true);
+  };
+
   return (
     <div>
       {applicationData ? (
@@ -82,8 +105,50 @@ const ApplicantProfileComponent = ({
               <h6 className="fw-semibold">Current Designation</h6>
               <p className="mx-2">{applicationData.currentDesignation}</p>
             </div>
+            {/* Action Buttton */}
+            <div>
+              <p>
+                {" "}
+                Applicant Short Listed :
+                {applicantFetchData.application.isContacted == "/u0000"
+                  ? "NO"
+                  : "YES"}
+              </p>
+              <button
+                onClick={(e) => {
+                  viewContact();
+                }}
+              >
+                View Contact Details
+              </button>
+              <div>
+                <p>
+                  Email :{" "}
+                  {applicationData.email
+                    ? applicationData.email
+                    : "Click on View Contact Details"}
+                </p>
+                <p>
+                  Mobile :{" "}
+                  {applicationData.mobile
+                    ? applicationData.mobile
+                    : "Click on View Contact Details"}
+                </p>
+              </div>
+              <button onClick={(e) => {}}>Short List Canditate</button>
+            </div>
           </div>
           <div className="row col-8">
+            {/* {Resume Headline} */}
+            <div>
+              <span className="card-title fw-bold">Resume Headline</span>
+              <pre>
+                {applicationData.resumeHeadline
+                  ? applicationData.resumeHeadline
+                  : "No Resume Headline"}
+              </pre>
+            </div>
+
             {/* Work Experience */}
             <div className="">
               <span className="card-title fw-bold">Work Experience</span>
@@ -109,7 +174,7 @@ const ApplicantProfileComponent = ({
                 applicationData.education.map((item, index) => (
                   <div className="row d-flex justify-content-between bg-light">
                     <span className="col-8 d-flex justify-content-start">
-                      <p style={{ fontWeight: "bold" }}>Degreee :</p>{" "}
+                      <p style={{ fontWeight: "bold" }}>Degree :</p>{" "}
                       {item.degreeName}
                     </span>
                     <span className="col-8 d-flex justify-content-start">

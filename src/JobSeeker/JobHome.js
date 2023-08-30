@@ -22,19 +22,27 @@ const JobHome = ({ userData, jobData, setJobData }) => {
   };
 
   return (
-    <div style={{ marginTop: "80px" }} className="Align-Center">
+    <div
+      style={{
+        marginTop: "80px",
+        height: "1000px",
+        backgroundImage: `url(${"https://img.freepik.com/premium-photo/searching-new-job-office-chair-isolated-we-are-hiring-concept-generative-ai_834602-21297.jpg?w=900"})`,
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+      }}
+      className="row Align-Center justify-content-center bg-success"
+    >
       {userData !== null ? (
-        <div>
-          <h1>Welcome {userData.firstName}</h1>
+        <div className="col-md-8 ">
+          <h1 className=" fst-italic mb-2 mt-4">
+            Welcome {userData.firstName}
+          </h1>
           <div>
-            <h5>Search for New Jobs</h5>
+            <h5>Search New Jobs</h5>
             <form onSubmit={search}>
-              <div
-                className="px-4 row"
-                style={{ marginTop: "30px", justifyContent: "center" }}
-              >
+              <div class="input-group input-group-lg mb-5 mt-5">
                 <input
-                  className=" col-lg-6"
+                  className=" col-lg-6 form-control"
                   type="text"
                   placeholder="Search with Job Title"
                   required
@@ -44,7 +52,10 @@ const JobHome = ({ userData, jobData, setJobData }) => {
                   }}
                   value={searchJobTitle}
                 />
-                <button type="submit" className=" col-1">
+                <button
+                  type="submit"
+                  className=" btn btn-outline-secondary bg-success text-white"
+                >
                   Search
                 </button>
               </div>

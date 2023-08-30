@@ -79,10 +79,6 @@ const JobCard = ({ job, setJobData, showApplyModal, setShowApplyModal }) => {
   return (
     <div
       className="FARCARD"
-      onClick={(e) => {
-        nav("/jobProfilePage");
-        setJobData(job);
-      }}
       style={{ marginLeft: "200px", marginRight: "200px" }}
     >
       <div
@@ -99,7 +95,13 @@ const JobCard = ({ job, setJobData, showApplyModal, setShowApplyModal }) => {
         }}
       >
         <div className="row g-4">
-          <div className="col-sm-12 col-md-8 d-flex align-items-center">
+          <div
+            onClick={(e) => {
+              nav("/jobProfilePage");
+              setJobData(job);
+            }}
+            className="col-sm-12 col-md-8 d-flex align-items-center"
+          >
             <img
               className="flex-shrink-0 img-fluid border rounded"
               src="./images/com-logo-4.jpg"

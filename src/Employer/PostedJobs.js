@@ -61,60 +61,81 @@ const PostedJobs = ({
   }, [employerData]);
   return (
     <div className="CPJOBS" style={{ marginTop: "60px" }}>
+      <h1 className="text-center fst-italic mb-5">Job Posted...</h1>
       {!viewApplicants ? (
-        <table className="table table-striped" style={{ textAlign: "center" }}>
-          <thead>
-            <th>Job Id</th>
-            <th>Job Title</th>
-            <th>Post Available</th>
-            <th>Job Posting Data</th>
-            <th>View Applicants</th>
-            <th>View</th>
-            <th>Delete</th>
-          </thead>
-          <tbody>
-            {jobs &&
-              jobs.map((item) => (
-                <tr key={item.jobId}>
-                  <td>{item.jobId}</td>
-                  <td>{item.jobTitle}</td>
-                  <td>{item.postAvail}</td>
-                  <td>{item.jobPostingDate}</td>
-                  <td>
-                    <button
-                      onClick={(e) => {
-                        setJob(item);
-                        setViewApplicants(true);
-                      }}
-                    >
-                      View Applicants
-                    </button>
-                  </td>
-                  <td>
-                    <button
-                      onClick={(e) => {
-                        setViewJob(true);
-                        setItemDelete(item);
-                        setJob(item);
-                      }}
-                    >
-                      View
-                    </button>
-                  </td>
-                  <td>
-                    <button
-                      onClick={(e) => {
-                        setConfirmDelete(true);
-                        setItemDelete(item);
-                      }}
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
-          </tbody>
-        </table>
+        <div>
+          {jobs &&
+            jobs.map((item) => (
+              <div
+                key={item.jobId}
+                className="row justify-content-center  mb-5 "
+              >
+                <div class="row card text-center col-md-6 col-sm-12 shadow-lg">
+                  <div class="card-header">
+                    <ul class="nav nav-pills card-header-pills">
+                      <li class="nav-item">
+                        <a
+                          class="nav-link active"
+                          href="#"
+                          onClick={(e) => {
+                            setJob(item);
+                            setViewApplicants(true);
+                          }}
+                        >
+                          View Applications
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a
+                          class="nav-link active ms-3"
+                          href="#"
+                          onClick={(e) => {
+                            setViewJob(true);
+                            setItemDelete(item);
+                            setJob(item);
+                          }}
+                        >
+                          View
+                        </a>
+                      </li>
+                      <li class="nav-item ms-3">
+                        <a
+                          class="nav-link active bg bg-danger"
+                          href="#"
+                          onClick={(e) => {
+                            setConfirmDelete(true);
+                            setItemDelete(item);
+                          }}
+                        >
+                          Delete
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="card-body justify-content-between">
+                    <h3 class="card-title text-center">{item.jobTitle}</h3>
+                    <div className="d-flex justify-content-between ">
+                      <p className="fw-semibold"> Job Id</p>
+                      <p className="mx-2">{item.jobId}</p>
+                    </div>
+
+                    <div className="d-flex justify-content-between ">
+                      <p className="fw-semibold">Job Title :</p>
+                      <p className="mx-2">{item.jobTitle}</p>
+                    </div>
+                    <div className="d-flex justify-content-between ">
+                      <p className="fw-semibold">Post Available :</p>
+                      <p className="mx-2">{item.postAvail}</p>
+                    </div>
+                    <div className="d-flex justify-content-between ">
+                      <p className="fw-semibold"> Job Posting Date :</p>
+                      <p className="mx-2">{item.jobPostingDate}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+        </div>
       ) : (
         <Applications
           job={job}

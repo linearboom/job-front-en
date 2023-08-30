@@ -46,7 +46,7 @@ const JobSeekerNav = ({ userData, setUserData }) => {
             <ul className="navbar-nav">
               <li className="nav-item">
                 <Link className="nav-link" to="jobhome">
-                  Jobs ? Home
+                  Search Jobs
                 </Link>
               </li>
               <li className="nav-item">
