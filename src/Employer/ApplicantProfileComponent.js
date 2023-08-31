@@ -12,7 +12,7 @@ const ApplicantProfileComponent = ({
   const [email, setEmail] = useState();
   const [mobile, setMobile] = useState();
 
-  const URL_VIEWCONTACT = "http://localhost:8181/employer/showContact";
+  //const URL_VIEWCONTACT = "http://localhost:8181/employer/showContact";
 
   useEffect(() => {
     const fetchApplicantData = async () => {
@@ -135,13 +135,13 @@ const ApplicantProfileComponent = ({
             </div>
             {/* Action Buttton */}
             <div>
-              <p>
+              {/* <p>
                 {" "}
                 Applicant Short Listed :
-                {applicantFetchData.application.isContacted == "/u0000"
+                {applicantFetchData.application?.isContacted === "/u0000"
                   ? "NO"
                   : "YES"}
-              </p>
+              </p> */}
               <button
                 onClick={(e) => {
                   viewContact();

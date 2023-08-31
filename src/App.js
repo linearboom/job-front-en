@@ -30,6 +30,7 @@ import EmployerProfile from "./Employer/EmployerProfileChange";
 import JobDescription from "./Employer/JobDescription";
 import Footer from "./Guest/Footer";
 import NewNavbar from "./Guest/NewNavbar";
+import About from "./Guest/About";
 
 const ProtectedRoute = ({ employerData, element }) => {
   if (employerData) {
@@ -143,6 +144,8 @@ function App() {
           path="contact"
           element={<Contact setUserData={setUserData} />}
         ></Route>
+        <Route path="about" element={<About />}></Route>
+
         {/* {Job Seeker Routes Create a protected route for the same} */}
 
         <Route

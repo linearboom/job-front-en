@@ -1,7 +1,7 @@
 import React from "react";
 import "./About.css";
-// import Aboutimg from "./about-us.png";
-// import Towing from "./Towing-aboutus.png";
+import Aboutimg from "./about-us.png";
+import Towing from "./Towing-aboutus.png";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "bootstrap-icons/font/bootstrap-icons.css";

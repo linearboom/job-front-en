@@ -58,7 +58,7 @@ const JobProfile = ({ userData, setJobData, setChangeJob }) => {
       .catch((error) => {
         console.error("Error fetching image:", error);
       });
-  }, []);
+  }, [userData]);
 
   const downloadResume = (e) => {
     e.preventDefault();
