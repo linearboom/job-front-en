@@ -4,7 +4,7 @@ import Mapimage from "./IndiaMap.png";
 import axios from "axios";
 
 function Contact() {
-  const API_URL = "http://localhost:8000/contact";
+  const API_URL = "http://localhost:8181/contactus";
   const [selectedButton, setSelectedButton] = useState("Sales");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -29,18 +29,25 @@ function Contact() {
     if (!validateForm()) {
       return;
     }
-    const data = { name: name, email: email, phone: phone, message: message };
+    const data = {
+      name: name,
+      emailAddress: email,
+      phone: phone,
+      message: message,
+    };
+
     if (selectedButton === "Sales") {
-      const newData = { data, sales: 1 };
-      const res = await axios.post(API_URL, newData);
+      const newData = { ...data, messageType: "Sales" };
+      console.log(newData);
+      let res = await axios.post(API_URL, newData);
       alert(res.data);
     } else if (selectedButton === "Support") {
-      const newData = { data, sales: 2 };
-      const res = await axios.post(API_URL, newData);
+      const newData = { ...data, messageType: "Support" };
+      let res = await axios.post(API_URL, newData);
       alert(res.data);
     } else if (selectedButton === "Escalations") {
-      const newData = { data, sales: 3 };
-      const res = await axios.post(API_URL, newData);
+      const newData = { ...data, messageType: "Escalations" };
+      let res = await axios.post(API_URL, newData);
       alert(res.data);
     }
   };

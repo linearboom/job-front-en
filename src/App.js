@@ -47,12 +47,12 @@ const ProtectedJob = ({ userData, element }) => {
 };
 
 function App() {
-  const [userData, setUserData] = useState(null);
-  const [employerData, setEmployerData] = useState(null);
-  const [jobData, setJobData] = useState(null);
-  const [adminData, setAdminData] = useState(null);
-  const [changeJob, setChangeJob] = useState(false);
-  const [changeEmployer, setChangeEmployer] = useState(false);
+  const [userData, setUserData] = useState(null); // Users
+  const [employerData, setEmployerData] = useState(null); // Employers
+  const [jobData, setJobData] = useState(null); // Job Data=> Particular Job
+  const [adminData, setAdminData] = useState(null); //  For Admin Functionality
+  const [changeJob, setChangeJob] = useState(false); // To check if there is any change in back end wrt job
+  const [changeEmployer, setChangeEmployer] = useState(false); // To check if there is any change in backend wrt employer
   const JOB_API = "http://localhost:8181/job_seeker/refresh";
   const EMP_API = "http://localhost:8181/employer/refresh";
 
@@ -88,21 +88,21 @@ function App() {
     }
   }, [changeEmployer]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      // Refreshed and sends the data using the session management
-      const res = await axios.post(
-        EMP_API,
-        { name: "Hello" },
-        { withCredentials: true }
-      );
-      setEmployerData(res.data);
-    };
-    if (changeEmployer) {
-      fetchData();
-      setChangeEmployer(false);
-    }
-  }, [changeEmployer]);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     // Refreshed and sends the data using the session management
+  //     const res = await axios.post(
+  //       EMP_API,
+  //       { name: "Hello" },
+  //       { withCredentials: true }
+  //     );
+  //     setEmployerData(res.data);
+  //   };
+  //   if (changeEmployer) {
+  //     fetchData();
+  //     setChangeEmployer(false);
+  //   }
+  // }, [changeEmployer]);
 
   return (
     <div className="App">
@@ -203,7 +203,7 @@ function App() {
         ></Route>
         <Route
           path="registeremployer"
-          element={<EmployerRegistraton setUserData={setUserData} />}
+          element={<EmployerRegistraton />}
         ></Route>
         <Route
           path="employerprofile"

@@ -13,31 +13,33 @@ const about = () => {
         <div className="col-12 col-lg-6">
           <h1>About Us</h1>
           <span>
-            We provide 24hrs roadside assistance for both Bikes &amp; Cars
-            anytime at any nook &amp;
+            Welcome, your ultimate destination for connecting talented
+            individuals with exciting
           </span>
           <br />
           <span>
-            corner of the country to our Subscribed Customers. We also provide
-            on-demand
+            career opportunities. We understand the transformative power of
+            finding the right
           </span>
           <br />
           <span>
-            support to customers in cities like Bangalore, Hyderabad, Mumbai,
-            Pune, Delhi,
+            job or the perfect candidate, and our platform is designed to make
+            this process
           </span>
           <br />
-          <span>Gurgaon, Chennai and more.</span>
+          <span> seamless and rewarding.</span>
+
           <br />
         </div>
         <img src={Aboutimg} className="col-12 col-lg-6" />
       </div>
-      <div className="row" id="aboutus-info">
-        <div className="col-12 col-lg-6">
-          <h5>AT YOUR SERVICE</h5>
-          <h1>Road Side Assistance You can count on</h1>
+      <div className="row  " id="aboutus-info">
+        <div></div>
+        <div className="col-sm-12 col-md-6 ">
+          <h5>Our Mission</h5>
+          <h1>Job Accessibility, Efficiency and Convenience </h1>
           <img
-            src={require("./BikeBreak.jpg")}
+            src={require("./Jobportal1.jpg")}
             className="col-12 col-lg-6"
             style={{ paddingTop: 20, paddingBottom: 30 }}
           />
@@ -48,28 +50,29 @@ const about = () => {
             breakdown and on-spot repair service across 19000+ pin codes
             covering 700+ districts in India. Powered by a deep-tech platform
             and driven by a Pan-India network of more than 5000+ skilled and
-            groomed mechanics, we ensure Reliability &amp; Quality without
-            compromising on Speed.
+            groomed mechanics, &amp; we ensure Reliability
           </span>
           <br />
           <br />
           <span>
-            Currently, we provide 24hrs roadside assistance for both Bikes &amp;
-            Cars anytime at any nook &amp; corner of the country to our
-            Subscribed Customers. We also provide on-demand support to customers
-            in cities like Bangalore, Hyderabad, Mumbai, Pune, Delhi, Gurgaon,
-            Chennai and more.
+            Our advanced algorithm utilizes cutting-edge technology to match job
+            seekers with positions that align with their skills, experience, and
+            aspirations. For employers, this means a higher likelihood of
+            finding candidates who are the perfect fit for their team.
           </span>
         </div>
-        <div className="col-12 col-lg-6">
+        <div className="col-sm-12 col-md-6 text-center ">
           <ul>
-            <li>Rated 4.7 Stars in Google</li>
-            <li>Largest network of EV trained mechanics</li>
-            <li>250+ strong people team</li>
-            <li>Serving the purpose through technology</li>
-            <li>An ISO 27001:2013 certified company</li>
+            <h5>Rated 4.7 Stars in Google</h5>
+            <h5>Largest network of Online Jobs</h5>
+            <h5>250+ strong people team</h5>
+            <h5>Serving the purpose through technology</h5>
+            <h5>An ISO 27001:2013 certified company</h5>
           </ul>
-          <img src={Towing} className="col-12 col-lg-6" />
+          <img
+            src={require("./Jobportal2.jpg")}
+            className="col-12 col-lg-6 rounded-3"
+          />
           <br />
         </div>
       </div>
@@ -93,7 +96,7 @@ const about = () => {
           retail, deep tech, insurance, risk analytics, underwriting,
           entertainment and information technology.
         </p>
-        <div className="row row-cols-1 row-cols-md-3 g-4 py-5">
+        <div className="row row-cols-1 row-cols-md-3 g-4 py-5 justify-content-center">
           <div className="col">
             <div className="card board-card">
               <img
@@ -104,7 +107,7 @@ const about = () => {
               <div className="card-body ">
                 <h3 className="card-title">Raj Chaudhari</h3>
                 <p className="text-muted">
-                  Co-Founder &amp; Managing Director - ReadyAssist
+                  Co-Founder &amp; Managing Director - JobEntry
                 </p>
                 <p className="card-text">Board of Directors</p>
               </div>
@@ -127,14 +130,47 @@ const about = () => {
           <div className="col">
             <div className="card board-card">
               <img
-                src={require("./gitesh.png")}
+                src={require("./rohan.jpg")}
                 className="card-img-top board-card-top"
                 alt="..."
               />
               <div className="card-body">
-                <h3 className="card-title">Gitesh Sarnobat</h3>
+                <h3 className="card-title">Rohan Maurya</h3>
                 <p className="text-muted">
-                  Co-Founder &amp; Managing Director - ReadyAssist
+                  Co-Founder &amp; Managing Director - JobEntry
+                </p>
+                <p className="card-text">Board of Directors</p>
+              </div>
+              <div className="d-flex justify-content-evenly">
+                <a
+                  href="https://in.linkedin.com/in/rohan-maurya-920910a9?trk=people-guest_people_search-card"
+                  target="blank"
+                >
+                  <i className="bi bi-linkedin" />
+                </a>
+                <a
+                  href="https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2Faccounts%2Fonetap%2F%3Fnext%3D%252F%26__coig_login%3D1"
+                  target="_blank"
+                >
+                  <i className="bi bi-instagram" />
+                </a>
+                <a href="mailto:hello@readyassist.in">
+                  <i className="bi bi-envelope-check-fill" />
+                </a>
+              </div>
+            </div>
+          </div>
+          <div className="col">
+            <div className="card board-card">
+              <img
+                src={require("./Israr.jpg")}
+                className="card-img-top board-card-top"
+                alt="..."
+              />
+              <div className="card-body">
+                <h3 className="card-title">Israr Khan</h3>
+                <p className="text-muted">
+                  Co-Founder &amp; Managing Director - JobEntry
                 </p>
                 <p className="card-text">Board of Directors</p>
               </div>
@@ -157,14 +193,44 @@ const about = () => {
           <div className="col">
             <div className="card board-card">
               <img
-                src={require("./rohit.jpeg")}
+                src={require("./Fardin.jpg")}
                 className="card-img-top board-card-top"
                 alt="..."
               />
               <div className="card-body">
-                <h3 className="card-title">Rohit Kolhale</h3>
+                <h3 className="card-title">Fardin Tambole</h3>
                 <p className="text-muted">
-                  Co - Founder &amp; Managing Director - Ready Assist
+                  Co-Founder &amp; Managing Director - JobEntry
+                </p>
+                <p className="card-text">Board of Directors</p>
+              </div>
+              <div className="d-flex justify-content-evenly">
+                <a
+                  href="https://www.linkedin.com/in/gitesh-sarnobat-66972a184"
+                  target="blank"
+                >
+                  <i className="bi bi-linkedin" />
+                </a>
+                <a href="https://www.instagram.com/" target="_blank">
+                  <i className="bi bi-instagram" />
+                </a>
+                <a href="mailto:hello@readyassist.in">
+                  <i className="bi bi-envelope-check-fill" />
+                </a>
+              </div>
+            </div>
+          </div>
+          <div className="col">
+            <div className="card board-card">
+              <img
+                src={require("./Bhoomika.jpg")}
+                className="card-img-top board-card-top"
+                alt="..."
+              />
+              <div className="card-body">
+                <h3 className="card-title">Bhoomika Dhanwat</h3>
+                <p className="text-muted">
+                  Co - Founder &amp; Managing Director - JobEntry
                 </p>
                 <p className="card-text">Board of Directors</p>
               </div>

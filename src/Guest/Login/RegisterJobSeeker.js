@@ -37,6 +37,7 @@ const RegisterJobSeeker = ({ setUserData }) => {
 
   const submit = async (e) => {
     e.preventDefault();
+    // e.preventDefault();
     // if (!validateForm()) {
     //   return;
     // }
@@ -51,6 +52,7 @@ const RegisterJobSeeker = ({ setUserData }) => {
     try {
       let res = await axios.post(API_URL, data);
       alert(res.data);
+      nav("/login");
     } catch {
       alert("Connection to the Server Failed");
     }
